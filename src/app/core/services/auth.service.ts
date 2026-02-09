@@ -14,15 +14,18 @@ export class AuthService {
 
  // Register avec mot de passe hashé
   register(user: User): Observable<User> {
-    const salt = bcrypt.genSaltSync(10); // génère le sel
-    const hashedPassword = bcrypt.hashSync(user.password, salt); // hash le mot de passe
+
+    const salt = bcrypt.genSaltSync(10);
+    const hashedPassword = bcrypt.hashSync(user.password, salt); 
 
     const userToSave = { ...user, password: hashedPassword };
 
+    localStorage.setItem('user', JSON.stringify(userToSave));
     return this.http.post<User>(this.apiUrl, userToSave);
+
   }
 
-  // Login retourne un UserSession (sans password)
+
   login(email: string, password: string): Observable<UserSession | null> {
   return this.http.get<User[]>(`${this.apiUrl}?email=${email}`).pipe(
     map(users => {

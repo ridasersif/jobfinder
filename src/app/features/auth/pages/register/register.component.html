@@ -1,53 +1,75 @@
-<div class="container mt-5" style="max-width: 500px;">
-  <h2>Inscription</h2>
+<div class="register-auth-card shadow-lg">
+  <!-- Left: Image Section -->
+  <div class="image-section d-none d-md-flex">
+    <h2>Rejoignez-nous !</h2>
+    <p>Trouvez l'opportunité qui vous correspond et donnez un nouvel élan à votre carrière.</p>
+  </div>
 
-  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+  <!-- Right: Form Section -->
+  <div class="form-section">
+    <div class="header-form">
+      <h2>Inscription</h2>
+      <a routerLink="/login" class="link-switch">Déjà membre ?</a>
+    </div>
 
-    <!-- First Name -->
-    <div class="mb-3">
-      <label class="form-label" for="firstName">Prénom</label>
-      <input id="firstName" type="text" class="form-control" formControlName="firstName">
-      <div *ngIf="submitted && f['firstName'].errors" class="text-danger">
-        <div *ngIf="f['firstName'].errors?.['required']">Prénom requis</div>
+    <p class="subtitle">Commencez votre aventure avec nous dès aujourd'hui.</p>
+
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <div class="row g-3">
+        <div class="col-md-6 form-group">
+          <label class="form-label" for="firstName">Prénom</label>
+          <input id="firstName" type="text" class="form-control" formControlName="firstName" placeholder="Jean">
+          @if(submitted && getError('firstName')) {
+             <div class="text-danger extra-small mt-1">
+              {{ getError('firstName') }}
+            </div>
+          }
+        </div>
+        <div class="col-md-6 form-group">
+          <label class="form-label" for="lastName">Nom</label>
+          <input id="lastName" type="text" class="form-control" formControlName="lastName" placeholder="Dupont">
+          @if(submitted && getError('lastName')) {
+             <div class="text-danger extra-small mt-1">
+              {{ getError('lastName') }}
+            </div>
+          }
+        </div>
       </div>
-    </div>
 
-    <!-- Last Name -->
-    <div class="mb-3">
-      <label class="form-label" for="lastName">Nom</label>
-      <input id="lastName" type="text" class="form-control" formControlName="lastName">
-      <div *ngIf="submitted && f['lastName'].errors" class="text-danger">
-        <div *ngIf="f['lastName'].errors?.['required']">Nom requis</div>
+      <div class="form-group my-3">
+        <label class="form-label" for="email">Email</label>
+        <input id="email" type="email" class="form-control" formControlName="email" placeholder="votre@email.com">
+       @if (submitted && getError('email')) {
+          <div class="text-danger extra-small mt-1">
+            {{ getError('email') }}
+          </div>
+        }
+
       </div>
-    </div>
 
-    <!-- Email -->
-    <div class="mb-3">
-      <label class="form-label" for="email">Email</label>
-      <input id="email" type="email" class="form-control" formControlName="email">
-      <div *ngIf="submitted && f['email'].errors" class="text-danger">
-        <div *ngIf="f['email'].errors?.['required']">Email requis</div>
-        <div *ngIf="f['email'].errors?.['email']">Email invalide</div>
+      <div class="form-group mb-4">
+        <label class="form-label" for="password">Mot de passe</label>
+        <input id="password" type="password" class="form-control" formControlName="password" placeholder="••••••••">
+        @if(submitted && getError('password')) {
+          <div class="text-danger extra-small mt-1">
+            {{ getError('password') }}
+          </div>
+        }
       </div>
-    </div>
 
-    <!-- Password -->
-    <div class="mb-3">
-      <label class="form-label" for="password">Mot de passe</label>
-      <input id="password" type="password" class="form-control" formControlName="password">
-      <div *ngIf="submitted && f['password'].errors" class="text-danger">
-        <div *ngIf="f['password'].errors?.['required']">Mot de passe requis</div>
-        <div *ngIf="f['password'].errors?.['minlength']">Minimum 6 caractères</div>
+      <button type="submit" class="btn btn-primary w-100" [disabled]="isLoading">
+        <span *ngIf="isLoading" class="spinner-border spinner-border-sm me-2"></span>
+        {{ isLoading ? 'Inscription...' : 'Créer mon compte' }}
+      </button>
+
+      <div *ngIf="errorMessage" class="alert alert-danger mt-3 py-2 extra-small border-0 shadow-sm text-center">
+        {{ errorMessage }}
       </div>
+    </form>
+
+    <div class="mt-4 text-center text-muted extra-small">
+      En vous inscrivant, vous acceptez nos <a href="#" class="text-primary text-decoration-none fw-semibold">Conditions
+        d'utilisation</a>
     </div>
-
-    <!-- Submit Button -->
-    <button type="submit" class="btn btn-primary">S’inscrire</button>
-
-    <!-- General Error Message -->
-    <div *ngIf="errorMessage" class="text-danger mt-2">
-      {{ errorMessage }}
-    </div>
-
-  </form>
+  </div>
 </div>

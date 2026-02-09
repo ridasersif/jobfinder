@@ -1,34 +1,73 @@
-<div class="container mt-5" style="max-width: 500px;">
-  <h2>Connexion</h2>
+<div class="login-auth-card shadow-lg">
+  <!-- Left: Form Section -->
+  <div class="form-section">
+    <div class="header-form">
+      <h2>Connexion</h2>
+      <a routerLink="/register" class="link-switch">Créer un compte</a>
+    </div>
 
-  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <p class="subtitle">Bon retour ! Veuillez saisir vos informations.</p>
 
-    <!-- Email -->
-    <div class="mb-3">
-      <label class="form-label" for="email">Email</label>
-      <input id="email" type="email" class="form-control" formControlName="email">
-      <div *ngIf="submitted && f['email'].errors" class="text-danger">
-        <div *ngIf="f['email'].errors['required']">Email requis</div>
-        <div *ngIf="f['email'].errors['email']">Email invalide</div>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="form-group mb-3">
+        <label class="form-label" for="email">Email</label>
+        <input id="email" type="email" class="form-control" formControlName="email" placeholder="votre@email.com">
+        <div *ngIf="submitted && f['email'].errors" class="text-danger extra-small mt-1">
+          <div *ngIf="f['email'].errors['required']">Email requis</div>
+          <div *ngIf="f['email'].errors['email']">Email invalide</div>
+        </div>
+      </div>
+
+      <div class="form-group mb-3">
+        <div class="d-flex justify-content-between">
+          <label class="form-label" for="password">Mot de passe</label>
+          <a href="#" class="extra-small text-muted text-decoration-none fw-semibold">Oublié ?</a>
+        </div>
+        <input id="password" type="password" class="form-control" formControlName="password" placeholder="••••••••">
+        <div *ngIf="submitted && f['password'].errors" class="text-danger extra-small mt-1">
+          <div *ngIf="f['password'].errors['required']">Mot de passe requis</div>
+        </div>
+      </div>
+
+      <div class="form-group mb-4">
+        <div class="form-check d-flex align-items-center">
+          <input type="checkbox" class="form-check-input mt-0 me-2" id="rememberMe">
+          <label class="form-check-label extra-small text-muted fw-medium" for="rememberMe">Se souvenir de moi</label>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary w-100" [disabled]="isLoading">
+        <span *ngIf="isLoading" class="spinner-border spinner-border-sm me-2"></span>
+        {{ isLoading ? 'Connexion en cours...' : 'Se connecter' }}
+      </button>
+
+      <div *ngIf="errorMessage" class="alert alert-danger mt-3 py-2 extra-small border-0 shadow-sm text-center">
+        {{ errorMessage }}
+      </div>
+    </form>
+
+    <div class="mt-4 text-center">
+      <p class="extra-small text-muted mb-3 font-semibold">Ou continuez avec</p>
+      <div class="row g-2">
+        <div class="col-6">
+          <button
+            class="btn btn-outline-light border text-dark w-100 py-2 extra-small shadow-sm d-flex align-items-center justify-content-center">
+            <i class="bi bi-google me-2 text-danger"></i>Google
+          </button>
+        </div>
+        <div class="col-6">
+          <button
+            class="btn btn-outline-light border text-dark w-100 py-2 extra-small shadow-sm d-flex align-items-center justify-content-center">
+            <i class="bi bi-github me-2"></i>Github
+          </button>
+        </div>
       </div>
     </div>
+  </div>
 
-    <!-- Password -->
-    <div class="mb-3">
-      <label class="form-label" for="password">Mot de passe</label>
-      <input id="password" type="password" class="form-control" formControlName="password">
-      <div *ngIf="submitted && f['password'].errors" class="text-danger">
-        <div *ngIf="f['password'].errors['required']">Mot de passe requis</div>
-      </div>
-    </div>
-
-    <!-- Submit Button -->
-    <button type="submit" class="btn btn-primary">Se connecter</button>
-
-    <!-- General Error Message -->
-    <div *ngIf="errorMessage" class="text-danger mt-2">
-      {{ errorMessage }}
-    </div>
-
-  </form>
+  <!-- Right: Image Section -->
+  <div class="image-section d-none d-md-flex">
+    <h2>Explorez votre futur.</h2>
+    <p>Rejoignez des milliers de professionnels et trouvez l'opportunité qui changera votre vie.</p>
+  </div>
 </div>
