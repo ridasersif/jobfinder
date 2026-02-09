@@ -34,6 +34,13 @@
       "lastName": "sersif",
       "email": "ridasersif1@gmail.com",
       "password": "$2b$10$oxOD6ACLCaL0vYbKGSBi3OB5Gbq.RnsX5zfXjFfZX5XxzP/2asmbm"
+    },
+    {
+      "id": "ca3e",
+      "firstName": "Grant",
+      "lastName": "Warner",
+      "email": "gezagydofy@mailinator.com",
+      "password": "$2b$10$i8SqooQdHjBo.HxWjYCxdOVbC3QQNXACkjlilp0RlJKNxhTfecTr2"
     }
   ],
   "favoritesOffers": [],
