@@ -1,0 +1,53 @@
+<div class="container mt-5" style="max-width: 500px;">
+  <h2>Inscription</h2>
+
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+
+    <!-- First Name -->
+    <div class="mb-3">
+      <label class="form-label" for="firstName">Prénom</label>
+      <input id="firstName" type="text" class="form-control" formControlName="firstName">
+      <div *ngIf="submitted && f['firstName'].errors" class="text-danger">
+        <div *ngIf="f['firstName'].errors?.['required']">Prénom requis</div>
+      </div>
+    </div>
+
+    <!-- Last Name -->
+    <div class="mb-3">
+      <label class="form-label" for="lastName">Nom</label>
+      <input id="lastName" type="text" class="form-control" formControlName="lastName">
+      <div *ngIf="submitted && f['lastName'].errors" class="text-danger">
+        <div *ngIf="f['lastName'].errors?.['required']">Nom requis</div>
+      </div>
+    </div>
+
+    <!-- Email -->
+    <div class="mb-3">
+      <label class="form-label" for="email">Email</label>
+      <input id="email" type="email" class="form-control" formControlName="email">
+      <div *ngIf="submitted && f['email'].errors" class="text-danger">
+        <div *ngIf="f['email'].errors?.['required']">Email requis</div>
+        <div *ngIf="f['email'].errors?.['email']">Email invalide</div>
+      </div>
+    </div>
+
+    <!-- Password -->
+    <div class="mb-3">
+      <label class="form-label" for="password">Mot de passe</label>
+      <input id="password" type="password" class="form-control" formControlName="password">
+      <div *ngIf="submitted && f['password'].errors" class="text-danger">
+        <div *ngIf="f['password'].errors?.['required']">Mot de passe requis</div>
+        <div *ngIf="f['password'].errors?.['minlength']">Minimum 6 caractères</div>
+      </div>
+    </div>
+
+    <!-- Submit Button -->
+    <button type="submit" class="btn btn-primary">S’inscrire</button>
+
+    <!-- General Error Message -->
+    <div *ngIf="errorMessage" class="text-danger mt-2">
+      {{ errorMessage }}
+    </div>
+
+  </form>
+</div>

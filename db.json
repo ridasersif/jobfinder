@@ -1,0 +1,41 @@
+{
+  "users": [
+    {
+      "id": "497d",
+      "firstName": "Garth",
+      "lastName": "Sykes",
+      "email": "voly@mailinator.com",
+      "password": "Pa$$w0rd!"
+    },
+    {
+      "id": "2391",
+      "firstName": "Xavier",
+      "lastName": "Boyer",
+      "email": "cexin@mailinator.com",
+      "password": "Pa$$w0rd!"
+    },
+    {
+      "id": "3866",
+      "firstName": "Amaya",
+      "lastName": "Hull",
+      "email": "cybotidud@mailinator.com",
+      "password": "$2b$10$EH8JZnlN9l3kltM6VRy7a.o.hfnAD1/iLSpBxFJXURGlKbWRFikFG"
+    },
+    {
+      "id": "2a2b",
+      "firstName": "Elton",
+      "lastName": "Mccoy",
+      "email": "gupykif@mailinator.com",
+      "password": "$2b$10$BGXu8ul9JpNSIyf5gmXdluSZJYz3Gyw1N0/kZyne7h4H.ePJQ18vm"
+    },
+    {
+      "id": "6a05",
+      "firstName": "rida",
+      "lastName": "sersif",
+      "email": "ridasersif1@gmail.com",
+      "password": "$2b$10$oxOD6ACLCaL0vYbKGSBi3OB5Gbq.RnsX5zfXjFfZX5XxzP/2asmbm"
+    }
+  ],
+  "favoritesOffers": [],
+  "applications": []
+}
