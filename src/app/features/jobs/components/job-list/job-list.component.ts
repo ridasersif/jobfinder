@@ -1,3 +1,4 @@
+import { ToastService } from './../../../../core/services/toast.service';
 import { JobService } from './../../services/job.service';
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -24,7 +25,8 @@ export class JobListComponent implements OnInit {
   constructor(
     private jobService: JobService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private toastService: ToastService
   ) { }
 
   ngOnInit(): void {
@@ -51,7 +53,9 @@ export class JobListComponent implements OnInit {
       },
       error: (err) => {
         console.error('Error fetching jobs:', err);
+
         this.isLoading = false;
+        this.toastService.show('Failed to load jobs. Please try again later.');
       }
     });
   }

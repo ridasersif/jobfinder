@@ -38,7 +38,7 @@ export class JobInfoComponent implements OnInit {
         this.job = foundJob || null;
         this.isLoading = false;
 
-        // Scroll to top of detail pane
+       
         window.scrollTo({ top: 0, behavior: 'smooth' });
       },
       error: (err) => {

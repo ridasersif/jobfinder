@@ -335,6 +335,27 @@
       "lastName": "Decker",
       "email": "bagojacy@mailinator.com",
       "password": "$2b$10$.m3khbfu4FTu067xHmNfS.C2DZ9y5wCt5C30PcVZ4EkoKRZvBVpS."
+    },
+    {
+      "id": "fc78",
+      "firstName": "Armando",
+      "lastName": "Quinn",
+      "email": "haxodepate@mailinator.com",
+      "password": "$2b$10$Pfdcqq8A0x7KJ6gKpxK38udNLoFg68Mi6h/LXNb/CKsRq7ki9QmSK"
+    },
+    {
+      "id": "afaf",
+      "firstName": "Lavinia",
+      "lastName": "Haney",
+      "email": "nuzacokaqa@mailinator.com",
+      "password": "$2b$10$E0L6MPd.ENx3WW08Yj/BB.RQegEN6wGrSW43Kig6M91ORYOAN5uOm"
+    },
+    {
+      "id": "7a79",
+      "firstName": "Merrill",
+      "lastName": "Russell",
+      "email": "beribadu@mailinator.com",
+      "password": "$2b$10$fImZLokuvpJNPvBVqo9TVuvGs.wy.Mfs/c0BiSbUJx6HnEkxqFJrW"
     }
   ],
   "favoritesOffers": [],
