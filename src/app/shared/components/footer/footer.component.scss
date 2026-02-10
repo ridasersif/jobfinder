@@ -1,0 +1,156 @@
+.modern-footer {
+    background: #0f172a;
+    color: #94a3b8;
+    padding: 80px 0 30px;
+    font-size: 0.95rem;
+
+    .footer-brand {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-weight: 800;
+        font-size: 1.5rem;
+        color: white;
+        margin-bottom: 1.5rem;
+
+        .brand-dot {
+            width: 10px;
+            height: 10px;
+            background: #3b82f6;
+            border-radius: 50%;
+        }
+    }
+
+    .footer-description {
+        line-height: 1.6;
+        margin-bottom: 2rem;
+    }
+
+    .social-links {
+        display: flex;
+        gap: 12px;
+
+        .social-icon {
+            width: 36px;
+            height: 36px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            transition: all 0.3s ease;
+            text-decoration: none;
+
+            &:hover {
+                background: #2563eb;
+                transform: translateY(-3px);
+            }
+        }
+    }
+
+    .footer-title {
+        color: white;
+        font-weight: 700;
+        font-size: 1.1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .footer-links {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+        li {
+            margin-bottom: 0.75rem;
+
+            a {
+                color: #94a3b8;
+                text-decoration: none;
+                transition: all 0.2s ease;
+
+                &:hover {
+                    color: white;
+                    padding-left: 5px;
+                }
+            }
+        }
+    }
+
+    .footer-text {
+        margin-bottom: 1rem;
+    }
+
+    .newsletter-form {
+        display: flex;
+        gap: 8px;
+        background: rgba(255, 255, 255, 0.05);
+        padding: 6px;
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+
+        .modern-input {
+            background: transparent;
+            border: none;
+            color: white;
+            padding: 8px 12px;
+            box-shadow: none;
+
+            &::placeholder {
+                color: #64748b;
+            }
+
+            &:focus {
+                outline: none;
+            }
+        }
+
+        .modern-btn-primary {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            white-space: nowrap;
+            transition: all 0.3s ease;
+
+            &:hover {
+                background: #1d4ed8;
+            }
+        }
+    }
+
+    .footer-divider {
+        margin: 60px 0 30px;
+        border-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .footer-bottom {
+        font-size: 0.85rem;
+
+        .footer-bottom-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: flex-end;
+            gap: 20px;
+
+            @media (max-width: 768px) {
+                justify-content: center;
+                margin-top: 15px;
+            }
+
+            li a {
+                color: #94a3b8;
+                text-decoration: none;
+                transition: color 0.2s ease;
+
+                &:hover {
+                    color: white;
+                }
+            }
+        }
+    }
+}

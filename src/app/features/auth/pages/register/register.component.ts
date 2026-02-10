@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../../../core/services/auth.service';
-import { Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { ToastService } from '../../../../core/services/toast.service';
 import { finalize } from 'rxjs';
+import { FormValidationService } from '../../../../shared/services/form-validation.service';
 
 @Component({
   selector: 'app-register',
@@ -17,6 +18,7 @@ export class RegisterComponent implements OnInit {
   submitted = false;
   errorMessage = '';
   isLoading = false;
+  returnUrl = '/home';
 
   validationMessages: Record<string, Record<string, string>> = {
   firstName: {
@@ -40,8 +42,9 @@ export class RegisterComponent implements OnInit {
     private fb: FormBuilder,
     private authService: AuthService,
     private router: Router,
-    private toastService: ToastService
-
+    private toastService: ToastService,
+    private formValidation: FormValidationService,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
@@ -51,14 +54,16 @@ export class RegisterComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]]
     });
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/home';
+
   }
 
- getError(controlName: string): string | null {
-    const control = this.registerForm.get(controlName);
-    if (!control?.errors) return null;
-
-    const firstError = Object.keys(control.errors)[0];
-    return this.validationMessages?.[controlName]?.[firstError] ?? null;
+  getError(controlName: string): string | null {
+    return this.formValidation.
+    getError(
+      this.registerForm,
+      controlName,
+      this.validationMessages);
   }
 
   onSubmit(): void {
@@ -74,8 +79,7 @@ export class RegisterComponent implements OnInit {
       next: () => {
         this.isLoading = false;
         this.toastService.show('Inscription réussie ✅', 'success');
-        this.router.navigate(['/login']);
-
+        this.router.navigate([this.returnUrl]);
       },
       error: (err) => {
         this.isLoading = false;
@@ -84,5 +88,9 @@ export class RegisterComponent implements OnInit {
         this.errorMessage = 'Une erreur est survenue lors de l\'inscription.';
       }
     });
+  }
+
+  navigateToLogin(): void {
+    this.router.navigate(['/login'], { queryParams: { returnUrl: this.returnUrl } });
   }
 }

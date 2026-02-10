@@ -1,0 +1,24 @@
+
+    <div class="toast-container position-fixed top-0 end-0 p-4" style="z-index: 2100;">
+      <div *ngFor="let t of toasts; let i = index"
+           [@slideIn]
+           [ngClass]="getToastClass(t.type)"
+           class="toast-glass d-flex align-items-center p-3 mb-3">
+
+        <div class="toast-icon-box me-3">
+          <i [class]="getIconClass(t.type)"></i>
+        </div>
+
+        <div class="flex-grow-1 overflow-hidden">
+          <p class="mb-0 toast-text text-truncate">{{ t.message }}</p>
+        </div>
+
+        <div type="button" class="btn-close-custom ms-3" (click)="removeToast(i)">
+          <i class="bi bi-x"></i>
+        </div>
+
+        <div class="toast-timer">
+          <div class="timer-inner" [style.background-color]="getTimerColor(t.type)"></div>
+        </div>
+      </div>
+    </div>

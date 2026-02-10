@@ -1,2 +1,115 @@
-<p>home works!</p>
+<main class="home-page">
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="hero-content animate-fade-up">
+                <h1>Find Your <span class="text-gradient">Dream Job</span> Today</h1>
+                <p class="hero-subtitle">Connecting talented professionals with the world's most innovative companies.
+                </p>
 
+                <div class="search-box">
+                    <div class="search-input">
+                        <lucide-icon name="search" class="icon"></lucide-icon>
+                        <input type="text" placeholder="Job title, keywords, or company">
+                    </div>
+                    <div class="search-input">
+                        <lucide-icon name="map-pin" class="icon"></lucide-icon>
+                        <input type="text" placeholder="Location">
+                    </div>
+                    <button class="search-button">Find Jobs</button>
+                </div>
+
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-value">25k+</span>
+                        <span class="stat-label">Active Jobs</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value">12k+</span>
+                        <span class="stat-label">Companies</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value">8k+</span>
+                        <span class="stat-label">Success Stories</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-bg-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+        </div>
+    </section>
+
+    <!-- Popular Categories Section -->
+    <section class="categories-section section-padding">
+        <div class="container">
+            <div class="section-header">
+                <h2>Popular Categories</h2>
+                <p>Explore jobs by your industry preference</p>
+            </div>
+
+            <div class="categories-grid">
+                <div class="category-card" *ngFor="let cat of categories">
+                    <div class="category-icon">
+                        <lucide-icon [name]="cat.icon"></lucide-icon>
+                    </div>
+                    <h3>{{ cat.name }}</h3>
+                    <span class="job-count">{{ cat.count }}</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Jobs Section -->
+    <section class="featured-jobs section-padding">
+        <div class="container">
+            <div class="section-header">
+                <div class="header-left">
+                    <h2>Featured Jobs</h2>
+                    <p>Hand-picked opportunities just for you</p>
+                </div>
+                <button class="btn-outline">View All Jobs</button>
+            </div>
+
+            <div class="jobs-list">
+                <div class="job-card animate-fade-up" *ngFor="let job of featuredJobs">
+                    <div class="job-card-main">
+                        <img title="job" [src]="job.logo" [alt]="job.company" class="company-logo">
+                        <div class="job-info">
+                            <h3>{{ job.title }}</h3>
+                            <p class="company-name">{{ job.company }}</p>
+                            <div class="job-meta">
+                                <span><lucide-icon name="map-pin" [size]="16"></lucide-icon> {{ job.location }}</span>
+                                <span><lucide-icon name="briefcase" [size]="16"></lucide-icon> {{ job.type }}</span>
+                                <span><lucide-icon name="circle-dollar-sign" [size]="16"></lucide-icon> {{ job.salary
+                                    }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="job-card-actions">
+                        <span class="posted-time"><lucide-icon name="clock" [size]="14"></lucide-icon> {{ job.postedAt
+                            }}</span>
+                        <button class="btn-primary">Apply Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-card">
+                <div class="cta-content">
+                    <h2>Ready to take the next step?</h2>
+                    <p>Join thousands of professionals who found their dream careers with us.</p>
+                    <div class="cta-buttons">
+                        <button class="btn-white">Post a Job</button>
+                        <button class="btn-primary-inverse">Get Started</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

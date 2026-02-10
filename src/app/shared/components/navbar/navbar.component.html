@@ -1,1 +1,47 @@
-<p>navbar works!</p>
+<nav class="navbar navbar-expand-lg fixed-top modern-navbar" [class.scrolled]="isScrolled">
+  <div class="container">
+    <a class="navbar-brand modern-brand" routerLink="/">
+      <span class="brand-dot"></span>
+      <span class="brand-text">jobfinder</span>
+    </a>
+
+    <button class="navbar-toggler custom-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#modernNavbar"
+      aria-controls="modernNavbar" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="hamburger-icon">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </button>
+
+    <div class="collapse navbar-collapse" id="modernNavbar">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
+        <li class="nav-item">
+          <a class="nav-link modern-link" routerLink="/" routerLinkActive="active"
+            [routerLinkActiveOptions]="{exact: true}">Accueil</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link modern-link" routerLink="/jobs" routerLinkActive="active">Trouver un emploi</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link modern-link" routerLink="/favorites" routerLinkActive="active">Favorites</a>
+        </li>
+
+        <div class="nav-divider"></div>
+
+        @if(isLoggedIn){
+        <li class="nav-item">
+          <a class="btn btn-outline-danger ms-lg-3" (click)="logout()">Se déconnecter</a>
+        </li>
+        }@else{
+        <li class="nav-item">
+          <a class="nav-link modern-link" [routerLink]="['/login']">Connexion</a>
+        </li>
+        <li class="nav-item">
+          <a class="btn modern-btn-primary ms-lg-3" [routerLink]="['/register']">S’inscrire</a>
+        </li>
+        }
+      </ul>
+    </div>
+  </div>
+</nav>
