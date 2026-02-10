@@ -10,7 +10,13 @@ export const routes: Routes = [
       { path: 'home', loadComponent: () => import('./features/home/home.component').then(m => m.HomeComponent) },
       { path: 'about', loadComponent: () => import('./features/about/about.component').then(m => m.AboutComponent) },
       { path: 'favorites', loadComponent: () => import('./features/favorites/favorites.component').then(m => m.FavoritesComponent), canActivate: [authGuard] },
-      { path: 'jobs', loadComponent: () => import('./features/jobs/components/job-list/job-list.component').then(m => m.JobListComponent) },
+      {
+        path: 'jobs',
+        loadComponent: () => import('./features/jobs/components/job-list/job-list.component').then(m => m.JobListComponent),
+        children: [
+          { path: ':slug', loadComponent: () => import('./features/jobs/components/job-info/job-info.component').then(m => m.JobInfoComponent) }
+        ]
+      },
     ]
   },
   {

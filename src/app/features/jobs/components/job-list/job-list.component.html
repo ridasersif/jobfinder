@@ -1,40 +1,74 @@
-<p>job-list works!</p>
-<div>
-  byuguihbo jioh ibiiohh h
-</div>
-<p>job-list works!</p>
-<div>
-  byuguihbo jioh ibiiohh h
-</div>
+<div class="jobs-page-wrapper pt-5 mt-4">
+  <!-- Ultra-Compact Search Header -->
+  <div class="search-header-glass py-2 sticky-top" style="top: 60px; z-index: 1020;">
+    <div class="container-fluid px-lg-5">
+      <div class="search-container-premium mx-auto d-flex align-items-center gap-2 px-3 py-1 shadow-sm">
+        <div class="search-field flex-grow-1">
+          <lucide-icon name="search" [size]="14" class="search-icon"></lucide-icon>
+          <input type="text" class="premium-input-field" [(ngModel)]="searchQuery" (input)="onSearch()"
+            placeholder="Rechercher par poste, entreprise...">
+        </div>
+        <div class="vr mx-1 opacity-25" style="height: 16px;"></div>
+        <div class="search-field flex-grow-1 d-none d-sm-flex">
+          <lucide-icon name="map-pin" [size]="14" class="search-icon"></lucide-icon>
+          <input type="text" class="premium-input-field" [(ngModel)]="locationQuery" (input)="onSearch()"
+            placeholder="Lieu">
+        </div>
+        <button class="btn btn-primary btn-sm px-3 fw-bold rounded-pill" (click)="onSearch()">Trouver</button>
+      </div>
+    </div>
+  </div>
 
-<p>job-list works!</p>
-<div>
-  byuguihbo jioh ibiiohh h
+  <!-- Main Content -->
+  <div class="container-fluid px-lg-5 mt-3">
+    <div class="row g-2">
+      <!-- Left Column: Ultra-Slim Job List -->
+      <div class="col-job-list">
+        <div class="card border-0 shadow-sm rounded-3 overflow-hidden h-vh-calc">
+          <div class="card-header bg-white border-bottom py-2 px-3 d-flex justify-content-between align-items-center">
+            <span class="fw-bold small text-muted text-uppercase letter-spacing-1">Résultats</span>
+            <span class="badge bg-light text-muted fw-normal">{{ filteredJobs.length }}</span>
+          </div>
+          <div class="list-group list-group-flush scroll-slim flex-grow-1 overflow-auto">
+            <div *ngIf="isLoading" class="p-4 text-center">
+              <div class="spinner-border spinner-border-sm text-primary opacity-50" role="status"></div>
+            </div>
+
+            <button *ngFor="let job of filteredJobs" [class.active]="selectedJobSlug === job.slug"
+              (click)="selectJob(job.slug)"
+              class="list-group-item list-group-item-action border-0 p-2 px-3 job-item-slim">
+              <div class="d-flex gap-2">
+                <img [src]="'https://api.dicebear.com/7.x/initials/svg?seed=' + job.company_name"
+                  [alt]="job.company_name" class="rounded border-0 shadow-xs"
+                  style="width: 32px; height: 32px; object-fit: contain; background: #f8f9fa;">
+                <div class="flex-grow-1 min-width-0">
+                  <h6 class="mb-0 fw-bold text-primary text-truncate ultra-small-title">{{ job.title }}</h6>
+                  <p class="mb-0 text-dark fw-medium x-small-text text-truncate">{{ job.company_name }}</p>
+                  <p class="mb-1 text-muted x-small-text">{{ job.location }}</p>
+                  <div class="d-flex align-items-center gap-2 opacity-75">
+                    <span class="text-success x-small-text" *ngIf="job.remote">Télétravail</span>
+                    <span class="text-muted x-small-text">3j</span>
+                  </div>
+                </div>
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: High-Density Job Detail -->
+      <div class="col-job-info d-none d-md-block">
+        <div class="sticky-top" style="top: 125px;">
+          <div class="card border-0 shadow-sm rounded-3 overflow-hidden h-vh-calc-detail">
+            <router-outlet></router-outlet>
+            <div *ngIf="!selectedJobSlug"
+              class="h-100 d-flex flex-column align-items-center justify-content-center p-5 text-center text-muted opacity-50">
+              <lucide-icon name="layout-template" [size]="40" class="mb-3"></lucide-icon>
+              <p class="small">Sélectionnez une offre pour voir les détails</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-
-<p>job-list works!</p>
-<div>
-  byuguihbo jioh ibiiohh h
-</div>
-
-<p>job-list works!</p>
-<div>
-  byuguihbo jioh ibiiohh h
-</div>
-
-<p>job-list works!</p>
-<div>
-  byuguihbo jioh ibiiohh h
-</div>
-
-<p>job-list works!</p>
-<div>
-  byuguihbo jioh ibiiohh h
-</div>
-
-<p>job-list works!</p>
-<div>
-  byuguihbo jioh ibiiohh h
-</div>
-
-
