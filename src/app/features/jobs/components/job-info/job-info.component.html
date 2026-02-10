@@ -2,7 +2,7 @@
     <div class="spinner-border spinner-border-sm text-primary" role="status"></div>
 </div>
 
-<div *ngIf="job && !isLoading" class="h-100 d-flex flex-column bg-white">
+<div *ngIf="job && !isLoading" class="h-100 d-flex flex-column bg-white overflow-auto scroll-slim-premium">
     <!-- Ultra-Compact Detail Header -->
     <div class="p-3 border-bottom shadow-sm">
         <div class="d-flex align-items-start gap-3 mb-2">
@@ -10,7 +10,7 @@
                 class="rounded border shadow-xs"
                 style="width: 48px; height: 48px; object-fit: contain; background: #f8f9fa;">
             <div class="flex-grow-1 min-width-0">
-                <h5 class="fw-bold mb-0 text-dark text-truncate">{{ job.title }}</h5>
+                <h5 class="fw-bold mb-0 text-dark text-truncate" style="font-size: 1.125rem;">{{ job.title }}</h5>
                 <div class="d-flex align-items-center flex-wrap gap-2 x-small-text-premium mt-1">
                     <span class="text-primary fw-bold cursor-pointer">{{ job.company_name }}</span>
                     <span class="text-muted">·</span>
@@ -30,7 +30,7 @@
             <span class="badge-premium" *ngFor="let type of job.job_types">
                 <lucide-icon name="clock" [size]="12"></lucide-icon> {{ type }}
             </span>
-            <span class="badge-premium text-success border-success-subtle">
+            <span class="badge-premium text-success border-success-subtle" style="background: #e6f4ea;">
                 <lucide-icon name="users" [size]="12"></lucide-icon> +100 candidats
             </span>
         </div>
@@ -44,9 +44,9 @@
     </div>
 
     <!-- High-Density Content Area -->
-    <div class="flex-grow-1 overflow-auto p-3 scroll-slim-premium bg-light bg-opacity-25">
+    <div class="p-3 bg-light bg-opacity-25">
         <!-- Premium Insight (Compact) -->
-        <div class="insight-premium-card p-2 px-3 border rounded-3 mb-3 d-flex align-items-center gap-3">
+        <div class="insight-premium-card p-2 px-3 border rounded-3 mb-3 d-flex align-items-center gap-3 shadow-sm">
             <div class="insight-icon-box shadow-sm">
                 <lucide-icon name="trending-up" [size]="16" class="text-warning"></lucide-icon>
             </div>

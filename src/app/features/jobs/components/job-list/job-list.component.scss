@@ -84,22 +84,30 @@
     }
 
     .ultra-small-title {
-        font-size: 0.8125rem;
-        line-height: 1.25;
+        font-size: 0.8125rem; // 13px
+        line-height: 1.2;
     }
 
     .x-small-text {
-        font-size: 0.725rem;
+        font-size: 0.75rem; // 12px
+        line-height: 1.2;
+    }
+
+    .xx-small-text {
+        font-size: 0.6875rem; // 11px
         line-height: 1.2;
     }
 
     .letter-spacing-1 {
-        letter-spacing: 0.5px;
+        letter-spacing: 0.4px;
     }
 }
 
 /* Ultra Slim Scrollbar */
 .scroll-slim {
+    scrollbar-width: thin;
+    scrollbar-color: #dee2e6 transparent;
+
     &::-webkit-scrollbar {
         width: 4px;
     }
