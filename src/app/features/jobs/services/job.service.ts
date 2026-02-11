@@ -11,6 +11,7 @@ export class JobService {
   constructor(private http: HttpClient) { }
 
   private apiUrl = 'https://www.arbeitnow.com/api/job-board-api';
+  private apiUrl2 = 'http://localhost:3000/jobs';
 
   getAllJobs() : Observable<{ data: Job[] }> {
     return this.http.get<{ data: Job[] }>(this.apiUrl);

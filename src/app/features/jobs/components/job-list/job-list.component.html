@@ -20,11 +20,11 @@
   </div>
 
   <!-- Main Content -->
-  <div class="container-fluid px-lg-5 mt-3">
-    <div class="row g-2">
+  <div class="container-fluid px-lg-5">
+    <div class="row g-0 fused-jobs-container shadow-sm rounded-3 overflow-hidden border bg-white">
       <!-- Left Column: Ultra-Slim Job List -->
-      <div class="col-job-list">
-        <div class="card border-0 shadow-sm rounded-3 overflow-hidden h-vh-calc">
+      <div class="col-job-list border-end">
+        <div class="h-vh-calc d-flex flex-column">
           <div class="card-header bg-white border-bottom py-2 px-3 d-flex justify-content-between align-items-center">
             <span class="fw-bold small text-muted text-uppercase letter-spacing-1">Résultats</span>
             <span class="badge bg-light text-muted fw-normal">{{ filteredJobs.length }}</span>
@@ -47,7 +47,6 @@
                   <p class="mb-1 text-muted x-small-text">{{ job.location }}</p>
                   <div class="d-flex align-items-center gap-2 opacity-75">
                     <span class="text-success x-small-text" *ngIf="job.remote">Télétravail</span>
-                    <span class="text-muted x-small-text">3j</span>
                   </div>
                 </div>
               </div>
@@ -57,9 +56,9 @@
       </div>
 
       <!-- Right Column: High-Density Job Detail -->
-      <div class="col-job-info d-none d-md-block">
-        <div class="sticky-top" style="top: 125px;">
-          <div class="card border-0 shadow-sm rounded-3 overflow-hidden h-vh-calc-detail">
+      <div class="col-job-info d-none d-md-block h-vh-calc">
+        <div class="h-100">
+          <div class="h-100">
             <router-outlet></router-outlet>
             <div *ngIf="!selectedJobSlug"
               class="h-100 d-flex flex-column align-items-center justify-content-center p-5 text-center text-muted opacity-50">
@@ -69,6 +68,7 @@
           </div>
         </div>
       </div>
+
     </div>
   </div>
 </div>

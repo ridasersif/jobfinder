@@ -23,7 +23,7 @@ export class AppLayoutComponent {
       .subscribe(() => {
 
         this.isJobsRoute = this.router.url.includes('jobs');
-
+        console.log('Current URL:', this.router.url, 'isJobsRoute:', this.isJobsRoute);
       });
   }
 

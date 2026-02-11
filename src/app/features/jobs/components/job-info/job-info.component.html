@@ -17,10 +17,15 @@
                     <span class="text-muted">{{ job.location }}</span>
                 </div>
             </div>
-            <div class="d-flex gap-1">
-                <button class="btn btn-icon-premium"><lucide-icon name="share-2" [size]="14"></lucide-icon></button>
-                <button class="btn btn-icon-premium"><lucide-icon name="bookmark" [size]="14"></lucide-icon></button>
+           <div class="d-flex gap-1">
+              <!-- Favorite button -->
+              <button class="btn btn-icon-premium" aria-label="Favorite">
+                <lucide-icon name="heart" [size]="20" class="text-danger"></lucide-icon>
+              </button>
             </div>
+
+
+
         </div>
 
         <div class="d-flex flex-wrap gap-1 mb-3">
@@ -29,9 +34,6 @@
             </span>
             <span class="badge-premium" *ngFor="let type of job.job_types">
                 <lucide-icon name="clock" [size]="12"></lucide-icon> {{ type }}
-            </span>
-            <span class="badge-premium text-success border-success-subtle" style="background: #e6f4ea;">
-                <lucide-icon name="users" [size]="12"></lucide-icon> +100 candidats
             </span>
         </div>
 

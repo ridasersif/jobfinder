@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { LucideAngularModule } from 'lucide-angular';
 
 interface JobCategory {
@@ -23,7 +24,7 @@ interface JobListing {
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, LucideAngularModule],
+  imports: [CommonModule, LucideAngularModule, RouterLink],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
