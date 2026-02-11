@@ -1,9 +1,26 @@
-<nav class="navbar navbar-expand-lg fixed-top modern-navbar" [class.scrolled]="isScrolled">
-  <div class="container">
-    <a class="navbar-brand modern-brand" routerLink="/">
-      <span class="brand-dot"></span>
-      <span class="brand-text">jobfinder</span>
+<nav class="navbar navbar-expand-lg fixed-top modern-navbar shadow-sm" [class.scrolled]="isScrolled">
+  <div class="container-fluid px-lg-5">
+    <a class="navbar-brand modern-brand-slim" routerLink="/">
+      <span class="brand-dot-slim"></span>
+      <span class="brand-text-slim">jobfinder</span>
     </a>
+
+    <!-- Integrated Search (Only on Jobs Page) -->
+    <div class="navbar-search-wrapper mx-auto d-none d-lg-flex" *ngIf="isJobsPage">
+      <div class="navbar-search-container d-flex align-items-center gap-1 px-2 py-1">
+        <div class="search-field flex-grow-1">
+          <lucide-icon name="search" [size]="14" class="search-icon"></lucide-icon>
+          <input type="text" class="premium-input-field" [(ngModel)]="searchQuery" (input)="onSearchChange()"
+            placeholder="Poste ou entreprise">
+        </div>
+        <div class="search-divider"></div>
+        <div class="search-field flex-grow-1">
+          <lucide-icon name="map-pin" [size]="14" class="search-icon"></lucide-icon>
+          <input type="text" class="premium-input-field" [(ngModel)]="locationQuery" (input)="onLocationChange()"
+            placeholder="Ville ou pays">
+        </div>
+      </div>
+    </div>
 
     <button class="navbar-toggler custom-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#modernNavbar"
       aria-controls="modernNavbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -15,30 +32,39 @@
     </button>
 
     <div class="collapse navbar-collapse" id="modernNavbar">
-      <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center gap-2">
         <li class="nav-item">
-          <a class="nav-link modern-link" routerLink="/" routerLinkActive="active"
-            [routerLinkActiveOptions]="{exact: true}">Accueil</a>
+          <a class="nav-link icon-link" routerLink="/" routerLinkActive="active"
+            [routerLinkActiveOptions]="{exact: true}" title="Accueil">
+            <lucide-icon name="home" [size]="16"></lucide-icon>
+          </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link modern-link" routerLink="/jobs" routerLinkActive="active">Trouver un emploi</a>
+          <a class="nav-link icon-link" routerLink="/jobs" routerLinkActive="active" title="Emplois">
+            <lucide-icon name="briefcase" [size]="16"></lucide-icon>
+          </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link modern-link" routerLink="/favorites" routerLinkActive="active">Favorites</a>
+          <a class="nav-link icon-link" routerLink="/favorites" routerLinkActive="active" title="Favoris">
+            <lucide-icon name="heart" [size]="16"></lucide-icon>
+          </a>
         </li>
 
         <div class="nav-divider"></div>
 
         @if(isLoggedIn){
         <li class="nav-item">
-          <a class="btn btn-outline-danger ms-lg-3" (click)="logout()">Se déconnecter</a>
+          <button class="btn logout-btn-premium d-flex align-items-center gap-2" (click)="logout()">
+            <lucide-icon name="log-out" [size]="14"></lucide-icon>
+            <span>Quitter</span>
+          </button>
         </li>
         }@else{
         <li class="nav-item">
-          <a class="nav-link modern-link" [routerLink]="['/login']">Connexion</a>
+          <a class="nav-link auth-link-simple" [routerLink]="['/login']">Connexion</a>
         </li>
         <li class="nav-item">
-          <a class="btn modern-btn-primary ms-lg-3" [routerLink]="['/register']">S’inscrire</a>
+          <a class="btn register-btn-slim" [routerLink]="['/register']">S’inscrire</a>
         </li>
         }
       </ul>

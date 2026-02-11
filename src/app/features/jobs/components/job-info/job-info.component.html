@@ -1,77 +1,83 @@
-<div *ngIf="isLoading" class="h-100 d-flex flex-column align-items-center justify-content-center p-5 opacity-50">
-    <div class="spinner-border spinner-border-sm text-primary" role="status"></div>
+<div *ngIf="isLoading" class="h-100 d-flex align-items-center justify-content-center bg-white">
+    <div class="loading-state text-center">
+        <div class="spinner-border spinner-border-sm text-primary mb-2" role="status"></div>
+        <p class="xx-small-text text-muted fw-bold text-uppercase">Chargement de l'offre</p>
+    </div>
 </div>
 
-<div *ngIf="job && !isLoading" class="h-100 d-flex flex-column bg-white overflow-auto scroll-slim-premium">
-    <!-- Ultra-Compact Detail Header -->
-    <div class="p-3 border-bottom shadow-sm">
-        <div class="d-flex align-items-start gap-3 mb-2">
-            <img [src]="'https://api.dicebear.com/7.x/initials/svg?seed=' + job.company_name" [alt]="job.company_name"
-                class="rounded border shadow-xs"
-                style="width: 48px; height: 48px; object-fit: contain; background: #f8f9fa;">
+<div *ngIf="job && !isLoading" class="job-detail-canvas h-100 d-flex flex-column bg-white">
+    <!-- Compact Header Section -->
+    <div class="detail-header-slim p-3 border-bottom">
+        <div class="d-flex align-items-start gap-3 mb-3">
+            <div class="detail-logo-slim shadow-xs">
+                <img [src]="'https://api.dicebear.com/7.x/initials/svg?seed=' + job.company_name"
+                    [alt]="job.company_name">
+            </div>
+
             <div class="flex-grow-1 min-width-0">
-                <h5 class="fw-bold mb-0 text-dark text-truncate" style="font-size: 1.125rem;">{{ job.title }}</h5>
-                <div class="d-flex align-items-center flex-wrap gap-2 x-small-text-premium mt-1">
-                    <span class="text-primary fw-bold cursor-pointer">{{ job.company_name }}</span>
-                    <span class="text-muted">·</span>
-                    <span class="text-muted">{{ job.location }}</span>
+                <div class="d-flex align-items-center gap-1 mb-0">
+                    <span class="company-label-slim">{{ job.company_name }}</span>
+                </div>
+                <h5 class="detail-title-slim">{{ job.title }}</h5>
+
+                <div class="detail-meta-row-slim d-flex flex-wrap align-items-center gap-2 mt-1">
+                    <div class="meta-item">
+                        <lucide-icon name="map-pin" [size]="12"></lucide-icon>
+                        <span>{{ job.location }}</span>
+                    </div>
+                    <div class="meta-item">
+                        <lucide-icon name="clock" [size]="12"></lucide-icon>
+                        <span>Posté le {{ (job.created_at * 1000) | date:'dd MMM yyyy' }}</span>
+                    </div>
                 </div>
             </div>
-           <div class="d-flex gap-1">
-              <!-- Favorite button -->
-              <button class="btn btn-icon-premium" aria-label="Favorite">
-                <lucide-icon name="heart" [size]="20" class="text-danger"></lucide-icon>
-              </button>
+        </div>
+
+        <!-- Action Bar Slim -->
+        <div class="d-flex align-items-center justify-content-between">
+            <div class="d-flex gap-2">
+                <button class="btn apply-btn-slim">
+                    Postuler
+                    <lucide-icon name="external-link" [size]="12"></lucide-icon>
+                </button>
+                <button class="btn save-btn-slim">
+                    <lucide-icon name="bookmark" [size]="14"></lucide-icon>
+                    Enregistrer
+                </button>
             </div>
 
-
-
-        </div>
-
-        <div class="d-flex flex-wrap gap-1 mb-3">
-            <span class="badge-premium" *ngIf="job.remote">
-                <lucide-icon name="monitor" [size]="12"></lucide-icon> Télétravail
-            </span>
-            <span class="badge-premium" *ngFor="let type of job.job_types">
-                <lucide-icon name="clock" [size]="12"></lucide-icon> {{ type }}
-            </span>
-        </div>
-
-        <div class="d-flex gap-2">
-            <button class="btn btn-primary btn-sm px-4 fw-bold rounded-pill shadow-sm d-flex align-items-center gap-2">
-                <lucide-icon name="zap" [size]="14"></lucide-icon> Candidature
-            </button>
-            <button class="btn btn-outline-secondary btn-sm px-4 fw-bold rounded-pill">Enregistrer</button>
+            <div class="d-flex gap-1">
+                <button class="btn tool-btn-slim" title="Partager"><lucide-icon name="share-2"
+                        [size]="14"></lucide-icon></button>
+            </div>
         </div>
     </div>
 
-    <!-- High-Density Content Area -->
-    <div class="p-3 bg-light bg-opacity-25">
-        <!-- Premium Insight (Compact) -->
-        <div class="insight-premium-card p-2 px-3 border rounded-3 mb-3 d-flex align-items-center gap-3 shadow-sm">
-            <div class="insight-icon-box shadow-sm">
-                <lucide-icon name="trending-up" [size]="16" class="text-warning"></lucide-icon>
+    <!-- Scrollable Content Hub -->
+    <div class="detail-body-premium flex-grow-1 overflow-auto scroll-slim p-3">
+        <!-- High-Density Insight Badges -->
+        <div class="d-flex flex-wrap gap-2 mb-4">
+            <div class="badge-v3">
+                <lucide-icon name="briefcase" [size]="12"></lucide-icon>
+                <span *ngFor="let type of job.job_types | slice:0:1">{{ type }}</span>
             </div>
-            <div class="flex-grow-1">
-                <p class="mb-0 x-small-text-premium fw-bold text-dark">Aperçu Candidat Premium</p>
-                <p class="mb-0 xx-small-text text-muted">Comparez votre profil à +100 candidats.</p>
+            <div class="badge-v3">
+                <lucide-icon name="zap" [size]="12"></lucide-icon>
+                <span>{{ job.remote ? 'Remote' : 'On-site' }}</span>
             </div>
-            <button
-                class="btn btn-link btn-sm p-0 x-small-text-premium fw-bold text-warning text-decoration-none">Essayer</button>
         </div>
 
-        <div class="mb-4">
-            <h6 class="fw-bold x-small-text-premium text-uppercase letter-spacing-1 text-muted mb-2">Description du
-                poste</h6>
-            <div class="job-description-modern lh-sm" [innerHTML]="job.description"></div>
+        <!-- Job Description Section -->
+        <div class="job-article-wrapper mb-4">
+            <h6 class="section-title-premium mb-2">À propos du poste</h6>
+            <div class="job-rich-text" [innerHTML]="job.description"></div>
         </div>
 
-        <!-- Expertise Section -->
-        <div class="border-top pt-3">
-            <h6 class="fw-bold x-small-text-premium text-uppercase letter-spacing-1 text-muted mb-2">Compétences
-                recherchées</h6>
-            <div class="d-flex flex-wrap gap-1">
-                <span class="skill-tag-premium" *ngFor="let tag of job.tags">
+        <!-- Skills Cloud -->
+        <div class="expertise-hub border-top pt-3">
+            <h6 class="section-title-premium mb-2">Compétences clés</h6>
+            <div class="skills-cloud d-flex flex-wrap gap-2">
+                <span class="skill-tag-v2" *ngFor="let tag of job.tags">
                     {{ tag }}
                 </span>
             </div>
@@ -79,7 +85,9 @@
     </div>
 </div>
 
-<div *ngIf="!job && !isLoading"
-    class="h-100 d-flex align-items-center justify-content-center p-5 text-muted opacity-50">
-    <p class="small">Offre non trouvée.</p>
+<div *ngIf="!job && !isLoading" class="h-100 d-flex align-items-center justify-content-center p-5 text-muted bg-white">
+    <div class="text-center">
+        <lucide-icon name="alert-circle" [size]="32" class="mb-3 opacity-25"></lucide-icon>
+        <p class="small">Nous n'avons pas pu trouver les informations de cette offre.</p>
+    </div>
 </div>

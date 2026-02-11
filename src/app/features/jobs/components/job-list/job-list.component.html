@@ -1,69 +1,78 @@
-<div class="jobs-page-wrapper pt-5 mt-4">
-  <!-- Ultra-Compact Search Header -->
-  <div class="search-header-glass py-2 sticky-top" style="top: 60px; z-index: 1020;">
-    <div class="container-fluid px-lg-5">
-      <div class="search-container-premium mx-auto d-flex align-items-center gap-2 px-3 py-1 shadow-sm">
-        <div class="search-field flex-grow-1">
-          <lucide-icon name="search" [size]="14" class="search-icon"></lucide-icon>
-          <input type="text" class="premium-input-field" [(ngModel)]="searchQuery" (input)="onSearch()"
-            placeholder="Rechercher par poste, entreprise...">
-        </div>
-        <div class="vr mx-1 opacity-25" style="height: 16px;"></div>
-        <div class="search-field flex-grow-1 d-none d-sm-flex">
-          <lucide-icon name="map-pin" [size]="14" class="search-icon"></lucide-icon>
-          <input type="text" class="premium-input-field" [(ngModel)]="locationQuery" (input)="onSearch()"
-            placeholder="Lieu">
-        </div>
-        <button class="btn btn-primary btn-sm px-3 fw-bold rounded-pill" (click)="onSearch()">Trouver</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Main Content -->
+<div class="jobs-page-wrapper">
+  <!-- Main Grid Container -->
   <div class="container-fluid px-lg-5">
-    <div class="row g-0 fused-jobs-container shadow-sm rounded-3 overflow-hidden border bg-white">
-      <!-- Left Column: Ultra-Slim Job List -->
-      <div class="col-job-list border-end">
-        <div class="h-vh-calc d-flex flex-column">
-          <div class="card-header bg-white border-bottom py-2 px-3 d-flex justify-content-between align-items-center">
-            <span class="fw-bold small text-muted text-uppercase letter-spacing-1">Résultats</span>
-            <span class="badge bg-light text-muted fw-normal">{{ filteredJobs.length }}</span>
-          </div>
-          <div class="list-group list-group-flush scroll-slim flex-grow-1 overflow-auto">
-            <div *ngIf="isLoading" class="p-4 text-center">
-              <div class="spinner-border spinner-border-sm text-primary opacity-50" role="status"></div>
-            </div>
+    <div class="row g-0 main-jobs-shell border shadow-sm">
 
-            <button *ngFor="let job of filteredJobs" [class.active]="selectedJobSlug === job.slug"
-              (click)="selectJob(job.slug)"
-              class="list-group-item list-group-item-action border-0 p-2 px-3 job-item-slim">
-              <div class="d-flex gap-2">
-                <img title="tt" [src]="'https://api.dicebear.com/7.x/initials/svg?seed=' + job.company_name"
-                  [alt]="job.company_name" class="rounded border-0 shadow-xs"
-                  style="width: 32px; height: 32px; object-fit: contain; background: #f8f9fa;">
-                <div class="flex-grow-1 min-width-0">
-                  <h6 class="mb-0 fw-bold text-primary text-truncate ultra-small-title">{{ job.title }}</h6>
-                  <p class="mb-0 text-dark fw-medium x-small-text text-truncate">{{ job.company_name }}</p>
-                  <p class="mb-1 text-muted x-small-text">{{ job.location }}</p>
-                  <div class="d-flex align-items-center gap-2 opacity-75">
-                    <span class="text-success x-small-text" *ngIf="job.remote">Télétravail</span>
-                  </div>
+      <!-- Left Sidebar: Job Stream -->
+      <div class="col-job-list border-end bg-white">
+        <!-- Results Summary -->
+        <div class="jobs-meta-header px-3 py-2 border-bottom d-flex align-items-center justify-content-between">
+          <div class="d-flex align-items-center gap-2">
+            <lucide-icon name="list" [size]="14" class="text-primary"></lucide-icon>
+            <span class="meta-label">Offres disponibles</span>
+          </div>
+          <span class="results-pill">{{ filteredJobs.length }} résultats</span>
+        </div>
+
+        <div class="job-stream scroll-slim-hidden h-vh-calc">
+          <div *ngIf="isLoading" class="p-5 text-center">
+            <div class="spinner-border spinner-border-sm text-primary" role="status"></div>
+          </div>
+
+          <div *ngIf="!isLoading && filteredJobs.length === 0" class="p-5 text-center text-muted">
+            <lucide-icon name="search-slash" [size]="24" class="mb-3 opacity-25"></lucide-icon>
+            <p class="small">Aucun job trouvé.</p>
+          </div>
+
+          <!-- Job Cards Flow -->
+          <button *ngFor="let job of filteredJobs" [class.active]="selectedJobSlug === job.slug"
+            (click)="selectJob(job.slug)" class="job-card-slim">
+
+            <div class="card-content d-flex gap-2">
+              <div class="logo-box-slim">
+                <img [src]="'https://api.dicebear.com/7.x/initials/svg?seed=' + job.company_name"
+                  [alt]="job.company_name" class="company-img">
+              </div>
+
+              <div class="info-content flex-grow-1 min-width-0">
+                <div class="d-flex justify-content-between align-items-start">
+                  <h6 class="job-title-text text-truncate">{{ job.title }}</h6>
+                </div>
+
+                <p class="company-text mb-0">{{ job.company_name }}</p>
+
+                <div class="location-text d-flex align-items-center gap-1">
+                  <lucide-icon name="map-pin" [size]="10"></lucide-icon>
+                  <span>{{ job.location }}</span>
+                  <span class="dot-separator" *ngIf="job.remote">·</span>
+                  <span class="text-success" *ngIf="job.remote">Remote</span>
+                </div>
+
+                <div class="card-tags-slim d-flex gap-1 mt-1">
+                  <span class="tag-label" *ngFor="let type of job.job_types">{{ type }}</span>
                 </div>
               </div>
-            </button>
-          </div>
+            </div>
+          </button>
         </div>
       </div>
 
-      <!-- Right Column: High-Density Job Detail -->
-      <div class="col-job-info d-none d-md-block h-vh-calc">
-        <div class="h-100">
-          <div class="h-100">
-            <router-outlet></router-outlet>
-            <div *ngIf="!selectedJobSlug"
-              class="h-100 d-flex flex-column align-items-center justify-content-center p-5 text-center text-muted opacity-50">
-              <lucide-icon name="layout-template" [size]="40" class="mb-3"></lucide-icon>
-              <p class="small">Sélectionnez une offre pour voir les détails</p>
+      <!-- Right Pane: Active Job Detail -->
+      <div class="col-job-info d-none d-md-block bg-light bg-opacity-10 h-vh-calc">
+        <div class="h-100 overflow-hidden">
+          <router-outlet></router-outlet>
+
+          <!-- Empty State View -->
+          <div *ngIf="!selectedJobSlug"
+            class="h-100 d-flex flex-column align-items-center justify-content-center p-5 text-center">
+            <div class="empty-detail-state">
+              <div class="illustration-box mb-4">
+                <lucide-icon name="layout" [size]="48" class="text-primary opacity-25"></lucide-icon>
+              </div>
+              <h5 class="fw-bold text-dark mb-2">Prêt à postuler ?</h5>
+              <p class="text-muted small mx-auto" style="max-width: 250px;">
+                Sélectionnez une offre à gauche pour consulter les détails complets et envoyer votre candidature.
+              </p>
             </div>
           </div>
         </div>

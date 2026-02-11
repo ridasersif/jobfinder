@@ -1,3 +1,4 @@
+import { SearchService } from './../../../../core/services/search.service';
 import { ToastService } from './../../../../core/services/toast.service';
 import { JobService } from './../../services/job.service';
 import { Component, OnInit } from '@angular/core';
@@ -6,6 +7,7 @@ import { RouterModule, Router, ActivatedRoute } from '@angular/router';
 import { LucideAngularModule } from 'lucide-angular';
 import { Job } from '../../models/job.model';
 import { FormsModule } from '@angular/forms';
+import { combineLatest } from 'rxjs';
 
 @Component({
   selector: 'app-job-list',
@@ -18,15 +20,14 @@ export class JobListComponent implements OnInit {
   jobs: Job[] = [];
   filteredJobs: Job[] = [];
   selectedJobSlug: string | null = null;
-  searchQuery: string = '';
-  locationQuery: string = '';
   isLoading: boolean = true;
 
   constructor(
     private jobService: JobService,
     private router: Router,
     private route: ActivatedRoute,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private searchService: SearchService
   ) { }
 
   ngOnInit(): void {
@@ -36,6 +37,14 @@ export class JobListComponent implements OnInit {
     this.route.firstChild?.paramMap.subscribe(params => {
       this.selectedJobSlug = params.get('slug');
     });
+
+    // Observe search and location changes from Navbar
+    combineLatest([
+      this.searchService.searchQuery$,
+      this.searchService.locationQuery$
+    ]).subscribe(([search, location]) => {
+      this.filterJobs(search, location);
+    });
   }
 
   fetchJobs(): void {
@@ -43,7 +52,10 @@ export class JobListComponent implements OnInit {
     this.jobService.getAllJobs().subscribe({
       next: (response) => {
         this.jobs = response.data;
-        this.filteredJobs = [...this.jobs];
+        this.filterJobs(
+          this.searchService.getSearchQueryValue(),
+          this.searchService.getLocationQueryValue()
+        );
         this.isLoading = false;
 
         // If we are on /jobs and no child is selected, select the first one on desktop
@@ -53,7 +65,6 @@ export class JobListComponent implements OnInit {
       },
       error: (err) => {
         console.error('Error fetching jobs:', err);
-
         this.isLoading = false;
         this.toastService.show('Failed to load jobs. Please try again later.');
       }
@@ -65,11 +76,13 @@ export class JobListComponent implements OnInit {
     this.router.navigate(['/jobs', slug]);
   }
 
-  onSearch(): void {
+  filterJobs(search: string, location: string): void {
+    const s = search.toLowerCase();
+    const l = location.toLowerCase();
+
     this.filteredJobs = this.jobs.filter(job =>
-      (job.title.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-        job.company_name.toLowerCase().includes(this.searchQuery.toLowerCase())) &&
-      (job.location.toLowerCase().includes(this.locationQuery.toLowerCase()))
+      (job.title.toLowerCase().includes(s) || job.company_name.toLowerCase().includes(s)) &&
+      (job.location.toLowerCase().includes(l))
     );
   }
 }
