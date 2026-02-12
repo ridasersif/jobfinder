@@ -33,7 +33,6 @@ export class JobListComponent implements OnInit {
   ngOnInit(): void {
     this.fetchJobs();
 
-    // Watch for route changes to highlight the selected job
     this.route.firstChild?.paramMap.subscribe(params => {
       this.selectedJobSlug = params.get('slug');
     });
@@ -52,6 +51,7 @@ export class JobListComponent implements OnInit {
     this.jobService.getAllJobs().subscribe({
       next: (response) => {
         this.jobs = response.data;
+        
         this.filterJobs(
           this.searchService.getSearchQueryValue(),
           this.searchService.getLocationQueryValue()
@@ -71,15 +71,16 @@ export class JobListComponent implements OnInit {
     });
   }
 
+
   selectJob(slug: string): void {
     this.selectedJobSlug = slug;
     this.router.navigate(['/jobs', slug]);
   }
 
+
   filterJobs(search: string, location: string): void {
     const s = search.toLowerCase();
     const l = location.toLowerCase();
-
     this.filteredJobs = this.jobs.filter(job =>
       (job.title.toLowerCase().includes(s) || job.company_name.toLowerCase().includes(s)) &&
       (job.location.toLowerCase().includes(l))

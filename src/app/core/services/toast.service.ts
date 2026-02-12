@@ -3,17 +3,20 @@ import { Subject } from 'rxjs';
 
 export interface Toast {
   message: string;
-  type: 'success' | 'error';
+  type: 'success' | 'error' | 'info' | 'warning';
 }
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class ToastService {
+
   private toastSubject = new Subject<Toast>();
+
   toastState = this.toastSubject.asObservable();
 
-  show(message: string, type: 'success' | 'error' = 'success') {
+  show(message: string, type: 'success' | 'error'| 'info' | 'warning' = 'success') {
     this.toastSubject.next({ message, type });
   }
 }

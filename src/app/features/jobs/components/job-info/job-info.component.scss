@@ -168,3 +168,45 @@
         display: none;
     }
 }
+
+
+
+
+
+
+.login-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+  backdrop-filter: blur(4px);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  z-index: 9999;
+}
+
+.login-modal-box {
+  width: 360px;
+  max-width: 90%;
+
+  background: white;
+  border-radius: 16px;
+  padding: 24px;
+
+  box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+
+  animation: modalIn .25s ease;
+}
+
+@keyframes modalIn {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

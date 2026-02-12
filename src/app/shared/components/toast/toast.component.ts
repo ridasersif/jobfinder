@@ -43,14 +43,35 @@ export class ToastComponent {
   }
 
   getToastClass(type: string): string {
-    return type === 'success' ? 'toast-success' : 'toast-error';
+    switch (type) {
+      case 'success': return 'toast-success';
+      case 'error': return 'toast-error';
+      case 'info': return 'toast-info';
+      case 'warning': return 'toast-warning';
+      default: return 'toast-success';
+    }
   }
 
-  getIconClass(type: string): string {
-    return type === 'success' ? 'bi bi-check2-circle' : 'bi bi-exclamation-triangle';
+
+ getIconClass(type: string): string {
+    switch(type) {
+      case 'success': return 'bi bi-check2-circle';
+      case 'error': return 'bi bi-exclamation-triangle';
+      case 'info': return 'bi bi-info-circle';
+      case 'warning': return 'bi bi-exclamation-circle';
+      default: return 'bi bi-info-circle';
+    }
   }
+
 
   getTimerColor(type: string): string {
-    return type === 'success' ? '#10b981' : '#ef4444';
+  switch(type) {
+    case 'success': return '#10b981';
+    case 'error': return '#ef4444';
+    case 'info': return '#3b82f6';
+    case 'warning': return '#f59e0b';  
+    default: return '#3b82f6';
   }
+}
+
 }

@@ -10,7 +10,7 @@
     <div class="detail-header-slim p-3 border-bottom">
         <div class="d-flex align-items-start gap-3 mb-3">
             <div class="detail-logo-slim shadow-xs">
-                <img [src]="'https://api.dicebear.com/7.x/initials/svg?seed=' + job.company_name"
+                <img title="test" [src]="'https://api.dicebear.com/7.x/initials/svg?seed=' + job.company_name"
                     [alt]="job.company_name">
             </div>
 
@@ -40,7 +40,7 @@
                     Postuler
                     <lucide-icon name="external-link" [size]="12"></lucide-icon>
                 </button>
-                <button class="btn save-btn-slim">
+                <button class="btn save-btn-slim" (click)="handleFavoriteClick()">
                     <lucide-icon name="bookmark" [size]="14"></lucide-icon>
                     Enregistrer
                 </button>
@@ -91,3 +91,34 @@
         <p class="small">Nous n'avons pas pu trouver les informations de cette offre.</p>
     </div>
 </div>
+
+<!-- LOGIN REQUIRED MODAL -->
+<div *ngIf="showLoginModal" class="login-modal-backdrop">
+
+  <div class="login-modal-box">
+
+    <h5 class="mb-3">Connexion requise</h5>
+
+    <p class="text-muted small mb-4">
+      Vous devez être connecté pour enregistrer ce job.
+    </p>
+
+    <div class="d-flex gap-2 justify-content-end">
+
+      <button class="btn btn-light"
+              (click)="showLoginModal = false">
+        Annuler
+      </button>
+
+      <button class="btn btn-primary"
+              (click)="goToLogin()">
+        Se connecter
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+

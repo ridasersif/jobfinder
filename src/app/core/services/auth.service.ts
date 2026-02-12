@@ -36,23 +36,22 @@ export class AuthService {
 
 
 
-
   register(user: User): Observable<User> {
+  const salt = bcrypt.genSaltSync(10);
+  const hashedPassword = bcrypt.hashSync(user.password, salt);
+  const userToSave = { ...user, password: hashedPassword };
 
-        console.log(this.loggedInSubject.value);
-    const salt = bcrypt.genSaltSync(10);
-    const hashedPassword = bcrypt.hashSync(user.password, salt);
+  return this.http.post<User>(this.apiUrl, userToSave).pipe(
+    map(savedUser => {
+      const { password, ...userSansPassword } = savedUser;
+      this.setStorage('user', userSansPassword);
+      this.loggedInSubject.next(true);
+      return savedUser;
+    })
+  );
+}
 
-    const userToSave = { ...user, password: hashedPassword };
 
-    this.setStorage('user', userToSave);
-    this.loggedInSubject.next(true);
-    console.log(this.isLoggedIn$);
-    console.log("________________________________________");
-    console.log(this.loggedInSubject.value);
-    return this.http.post<User>(this.apiUrl, userToSave);
-
-  }
 
 
   login(email: string, password: string): Observable<UserSession | null> {

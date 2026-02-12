@@ -9,24 +9,7 @@ import { provideToastr } from 'ngx-toastr';
 
 import { LucideAngularModule } from 'lucide-angular';
 
-import {
-  LayoutTemplate,
-  Monitor,
-  Palette,
-  TrendingUp,
-  DollarSign,
-  Activity,
-  GraduationCap,
-  Search,
-  MapPin,
-  Clock,
-  Briefcase,
-  CircleDollarSign,
-  Share2,
-  Bookmark,
-  Zap,
-  Heart
-} from 'lucide-angular';
+import { LUCIDE_ICONS } from './shared/icons/lucide-icons';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -41,25 +24,6 @@ export const appConfig: ApplicationConfig = {
       progressBar: true,
     }),
 
-    importProvidersFrom(
-      LucideAngularModule.pick({
-        LayoutTemplate,
-        Monitor,
-        Palette,
-        TrendingUp,
-        DollarSign,
-        Activity,
-        GraduationCap,
-        Search,
-        MapPin,
-        Clock,
-        Briefcase,
-        CircleDollarSign,
-        Share2,
-        Bookmark,
-        Zap,
-        Heart
-      })
-    )
+    importProvidersFrom( LucideAngularModule.pick(LUCIDE_ICONS) )
   ]
 };
