@@ -8,20 +8,66 @@
       "password": "$2b$10$oxOD6ACLCaL0vYbKGSBi3OB5Gbq.RnsX5zfXjFfZX5XxzP/2asmbm"
     },
     {
-      "id": "48ca",
-      "firstName": "Hedley",
-      "lastName": "Puckett",
-      "email": "ryraqugaj@mailinator.com",
-      "password": "$2b$10$Cp5f/TeSU0FmaTLGxygl/u9DoleOU9DYkQlovjzhGzNZSSA6rU7dq"
-    },
-    {
-      "id": "134d",
-      "firstName": "Tate",
-      "lastName": "Wilkinson",
-      "email": "bicifa@mailinator.com",
-      "password": "$2b$10$U1cviN2O1k4XqZF486gcPeEdv6Nqim/z1/73D3CCezLSa2HIno07e"
+      "id": "f2fc",
+      "firstName": "sersif",
+      "lastName": "sersif",
+      "email": "sersif@gmail.Com",
+      "password": "$2b$10$lyNFSJITrdoa41oR3igeu.xJPukyTBWUJWJWmO3GYrLstgkVOHok6"
     }
   ],
-  "favoritesOffers": [],
-  "applications": []
+  "favoritesOffers": [
+    {
+      "id": "0cd4",
+      "userId": "f2fc",
+      "slug": "regionalleiter-vertrieb-sicherheitstechnik-berlin-88026",
+      "title": "Regionalleiter Vertrieb (m/w/d) Sicherheitstechnik Berlin",
+      "company": "Stadtritter GmbH",
+      "location": "Berlin"
+    },
+    {
+      "id": "7da3",
+      "userId": "f2fc",
+      "slug": "it-systemelektroniker-sicherheitstechnik-berlin-37005",
+      "title": "IT-Systemelektroniker (m/w/d) Sicherheitstechnik Berlin",
+      "company": "Stadtritter GmbH",
+      "location": "Berlin"
+    },
+    {
+      "id": "a55e",
+      "userId": "f2fc",
+      "slug": "global-privacy-compliance-managerin-hamburg-486433",
+      "title": "Global Privacy & Compliance Manager:in (d/w/m)",
+      "company": "HYROX World GmbH",
+      "location": "Hamburg"
+    },
+    {
+      "id": "b546",
+      "userId": "f2fc",
+      "slug": "videograf-cutter-gesucht-hamburg-63983",
+      "title": "Videograf & Cutter (m/w/d) gesucht!",
+      "company": "talenthafen GmbH",
+      "location": "Hamburg"
+    },
+    {
+      "id": "3197",
+      "userId": "6a05",
+      "slug": "regionalleiter-vertrieb-sicherheitstechnik-berlin-88026",
+      "title": "Regionalleiter Vertrieb (m/w/d) Sicherheitstechnik Berlin",
+      "company": "Stadtritter GmbH",
+      "location": "Berlin"
+    }
+  ],
+  "applications": [
+    {
+      "id": "2058",
+      "userId": "6a05",
+      "JobSlug": "team-lead-accounting-scaling-phase-berlin-95956",
+      "title": "Team Lead Accounting | Scaling Phase",
+      "company": "Matera GmbH",
+      "location": "Berlin",
+      "status": "pending",
+      "dateAdded": "2026-02-16T10:38:03.038Z",
+      "statusUpdated": null
+    }
+  ]
 }

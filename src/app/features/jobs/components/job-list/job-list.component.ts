@@ -51,7 +51,7 @@ export class JobListComponent implements OnInit {
     this.jobService.getAllJobs().subscribe({
       next: (response) => {
         this.jobs = response.data;
-        
+
         this.filterJobs(
           this.searchService.getSearchQueryValue(),
           this.searchService.getLocationQueryValue()
@@ -59,7 +59,7 @@ export class JobListComponent implements OnInit {
         this.isLoading = false;
 
         // If we are on /jobs and no child is selected, select the first one on desktop
-        if (!this.selectedJobSlug && this.filteredJobs.length > 0 && window.innerWidth > 768) {
+        if (!this.selectedJobSlug && this.filteredJobs.length) {
           this.selectJob(this.filteredJobs[0].slug);
         }
       },

@@ -13,13 +13,15 @@ import {
   CircleDollarSign,
   Share2,
   Bookmark,
+  BookmarkCheck,
   Zap,
   Heart,
   Home,
   List,
   ExternalLink,
   LogOut,
-  AlertCircle
+  AlertCircle,
+  FileText
 
 } from 'lucide-angular';
 
@@ -38,6 +40,7 @@ export const LUCIDE_ICONS = {
   CircleDollarSign,
   Share2,
   Bookmark,
+  BookmarkCheck,
   Zap,
   Heart,
   Home,
@@ -45,5 +48,6 @@ export const LUCIDE_ICONS = {
   ExternalLink,
   LogOut,
   AlertCircle,
+  FileText
 
 };

@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 
-//this service is responsible for fetchinng jobs from the API and providing then to the components 
+//this service is responsible for fetchinng jobs from the API and providing then to the components
 @Injectable({
   providedIn: 'root'
 })

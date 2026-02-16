@@ -1,1 +1,23 @@
-<p>favorite works!</p>
+<div class="container">
+  <h1>Favorite</h1>
+
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Company</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      @for (favorite of favorites$ | async; track favorite.id) {
+        <tr>
+          <td>{{ favorite.id }}</td>
+          <td>{{ favorite.title }}</td>
+          <td>{{ favorite.company }}</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>

@@ -28,7 +28,7 @@ interface JobListing {
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent {
   categories: JobCategory[] = [
     { id: 1, name: 'Technology', icon: 'monitor', count: '1.2k+ jobs' },
     { id: 2, name: 'Design', icon: 'palette', count: '800+ jobs' },
@@ -71,8 +71,7 @@ export class HomeComponent implements OnInit {
     }
   ];
 
-  ngOnInit(): void {
-  }
+
 }
 
 

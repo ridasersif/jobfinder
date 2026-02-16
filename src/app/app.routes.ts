@@ -9,7 +9,7 @@ export const routes: Routes = [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', loadComponent: () => import('./features/home/home.component').then(m => m.HomeComponent) },
       { path: 'about', loadComponent: () => import('./features/about/about.component').then(m => m.AboutComponent) },
-      { path: 'favorites', loadComponent: () => import('./features/favorites/favorites.component').then(m => m.FavoritesComponent), canActivate: [authGuard] },
+      { path: 'favorites', loadComponent: () => import('./features/favorite/favorite/favorite.component').then(m => m.FavoriteComponent), canActivate: [authGuard] },
       {
         path: 'jobs',
         loadComponent: () => import('./features/jobs/components/job-list/job-list.component').then(m => m.JobListComponent),
@@ -17,6 +17,7 @@ export const routes: Routes = [
           { path: ':slug', loadComponent: () => import('./features/jobs/components/job-info/job-info.component').then(m => m.JobInfoComponent) }
         ]
       },
+      {path: 'applications', loadComponent: () => import('./features/application/application/application.component').then(m => m.ApplicationComponent), canActivate: [authGuard] }
     ]
   },
   {
