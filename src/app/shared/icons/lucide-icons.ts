@@ -21,7 +21,10 @@ import {
   ExternalLink,
   LogOut,
   AlertCircle,
-  FileText
+  FileText,
+  Trash2,
+  AlertTriangle,
+  Info
 
 } from 'lucide-angular';
 
@@ -48,6 +51,8 @@ export const LUCIDE_ICONS = {
   ExternalLink,
   LogOut,
   AlertCircle,
-  FileText
-
+  FileText,
+  Trash2,
+  AlertTriangle,
+  Info
 };

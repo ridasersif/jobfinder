@@ -1,5 +1,5 @@
 import { Favorite } from './../../../favorite/models/favorite.model';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { JobService } from '../../services/job.service';
@@ -14,6 +14,7 @@ import * as FavoritesActions from '../../../favorite/state/favorites.actions';
 import * as FavoritesSelectors from '../../../favorite/state/favorites.selectors';
 import { Application } from '../../../application/models/application.model';
 import * as ApplicationsActions from '../../../application/application/state/applications.actions';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-job-info',
@@ -22,14 +23,16 @@ import * as ApplicationsActions from '../../../application/application/state/app
   templateUrl: './job-info.component.html',
   styleUrl: './job-info.component.scss'
 })
-export class JobInfoComponent implements OnInit {
+export class JobInfoComponent implements OnInit, OnDestroy {
 
   isLoggedIn = false;
   job: Job | null = null;
   isLoading: boolean = false;
+  private destroy$ = new Subject<void>();
   currentUserId: number | null = null;
   showLoginModal = false;
   isFavorited: boolean = false;
+  favorites: Favorite[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -55,13 +58,12 @@ export class JobInfoComponent implements OnInit {
     });
 
     this.store
-    .select(FavoritesSelectors.selectAllFavorites)
-    .subscribe(favorites => {
-      if(!this.job) return;
-      this.isFavorited = favorites.some(
-        fav => fav.slug === this.job?.slug
-      )
-    });
+      .select(FavoritesSelectors.selectAllFavorites)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(favorites => {
+        this.favorites = favorites;
+        this.updateFavoriteStatus();
+      });
 
 
   }
@@ -73,6 +75,7 @@ export class JobInfoComponent implements OnInit {
         const foundJob = response.data.find(j => j.slug === slug);
 
         this.job = foundJob || null;
+        this.updateFavoriteStatus();
         this.isLoading = false;
       },
       error: (err) => {
@@ -100,12 +103,34 @@ export class JobInfoComponent implements OnInit {
     );
   }
 
+  removeFromFavorite(): void {
+    if (!this.job || !this.isFavorited) return;
+
+    const favoriteToRemove = this.favorites.find(f => f.slug === this.job?.slug);
+    if (favoriteToRemove && favoriteToRemove.id) {
+      this.store.dispatch(FavoritesActions.deleteFavorite({ id: favoriteToRemove.id }));
+    }
+  }
+
+  updateFavoriteStatus(): void {
+    if (!this.job) {
+      this.isFavorited = false;
+      return;
+    }
+    this.isFavorited = this.favorites.some(fav => fav.slug === this.job?.slug);
+  }
+
   handleFavoriteClick() {
     if (!this.isLoggedIn) {
       this.showLoginModal = true;
       return;
     }
-    this.addToFavorite();
+
+    if (this.isFavorited) {
+      this.removeFromFavorite();
+    } else {
+      this.addToFavorite();
+    }
   }
 
   addToApplication() {
@@ -141,5 +166,9 @@ export class JobInfoComponent implements OnInit {
 
 
 
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
 
 }

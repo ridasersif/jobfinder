@@ -14,7 +14,7 @@ export class FavoritesEffects {
     private favoritesService: FavoriteService,
     private authService: AuthService,
     private toastService: ToastService
-  ) {}
+  ) { }
 
   private getCurrentUserId(): number | null {
     const user = this.authService.getCurrentUser();
@@ -150,6 +150,33 @@ export class FavoritesEffects {
             'Job ajouté à vos favoris ! ❤️',
             'success'
           );
+        })
+      ),
+    { dispatch: false }
+  );
+
+  // ================= DELETE FAVORITE SUCCESS TOAST =================
+  deleteFavoriteSuccessToast$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(FavoritesActions.deleteFavoriteSuccess),
+        tap(() => {
+          this.toastService.show(
+            'Job retiré de vos favoris !',
+            'success'
+          );
+        })
+      ),
+    { dispatch: false }
+  );
+
+  // ================= DELETE FAVORITE ERROR TOAST =================
+  deleteFavoriteErrorToast$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(FavoritesActions.deleteFavoriteFailure),
+        tap(action => {
+          this.toastService.show(action.error, 'error');
         })
       ),
     { dispatch: false }
