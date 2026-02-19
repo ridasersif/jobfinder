@@ -21,6 +21,8 @@ export class JobListComponent implements OnInit {
   filteredJobs: Job[] = [];
   selectedJobSlug: string | null = null;
   isLoading: boolean = true;
+  currentPage = 1;
+  pageSize = 10;
 
   constructor(
     private jobService: JobService,
@@ -59,9 +61,10 @@ export class JobListComponent implements OnInit {
         this.isLoading = false;
 
         // If we are on /jobs and no child is selected, select the first one on desktop
-        if (!this.selectedJobSlug && this.filteredJobs.length) {
-          this.selectJob(this.filteredJobs[0].slug);
+        if (!this.selectedJobSlug && this.paginatedJobs.length) {
+          this.selectJob(this.paginatedJobs[0].slug);
         }
+
       },
       error: (err) => {
         console.error('Error fetching jobs:', err);
@@ -79,11 +82,50 @@ export class JobListComponent implements OnInit {
 
 
   filterJobs(search: string, location: string): void {
-    const s = search.toLowerCase();
-    const l = location.toLowerCase();
+    const s = (search || '').toLowerCase();
+    const l = (location || '').toLowerCase();
+
     this.filteredJobs = this.jobs.filter(job =>
       (job.title.toLowerCase().includes(s) || job.company_name.toLowerCase().includes(s)) &&
       (job.location.toLowerCase().includes(l))
     );
+
+     this.currentPage = 1;
+
+    if (!this.selectedJobSlug && this.paginatedJobs.length) {
+      this.selectJob(this.paginatedJobs[0].slug);
+    }
   }
+
+  // Pagination logic
+  get totalPages(): number {
+    return Math.ceil(this.filteredJobs.length / this.pageSize) || 1;
+  }
+
+  get paginatedJobs(): Job[] {
+    const start = (this.currentPage - 1) * this.pageSize;
+    return this.filteredJobs.slice(start, start + this.pageSize);
+  }
+
+  goToPage(page: number): void {
+    if (page < 1 || page > this.totalPages) return;
+    this.currentPage = page;
+
+    const firstJob = this.paginatedJobs[0];
+    if (firstJob) {
+      this.selectJob(firstJob.slug);
+    }
+  }
+
+  nextPage(): void {
+    this.goToPage(this.currentPage + 1);
+  }
+
+  prevPage(): void {
+    this.goToPage(this.currentPage - 1);
+  }
+
+
+
+
 }
