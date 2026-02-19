@@ -10,37 +10,97 @@ import { catchError, map, mergeMap, of, tap } from 'rxjs';
 export class ApplicationsEffects {
 
   constructor(
-    private applicationService:ApplicationService,
-    private actions$:Actions
-  ){}
+    private applicationService: ApplicationService,
+    private actions$: Actions
+  ) { }
 
 
-  //==============ADD APPLICATION========================
-
-  addApplication$= createEffect(()=>
+  addApplication$ = createEffect(() =>
     this.actions$.pipe(
       ofType(ApplicationActions.addApplication),
-      tap(action => console.log("✅ EFFECT RECEIVED ACTION:", action)),
-      mergeMap(({application }) =>
+      mergeMap(({ application }) =>
         this.applicationService.addApplication(application).pipe(
-
-           tap(res => console.log("✅ HTTP RESPONSE:", res)),
           map((savedApplication) =>
             ApplicationActions.addApplicationSuccess({
-              application:savedApplication
+              application: savedApplication
             })
           ),
-         catchError(error => {
-            console.log("❌ EFFECT ERROR:", error);
-            return of(
+          catchError(error =>
+            of(
               ApplicationActions.addApplicationFailure({
                 error: error.message || 'Something went wrong'
               })
-            );
-          })
+            )
+          )
         )
       )
     )
-  )
+  );
+
+  loadApplications$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ApplicationActions.loadApplications),
+      mergeMap(({ userId }) =>
+        this.applicationService.getApplicationsByUserId(userId.toString()).pipe(
+          map((applications) =>
+            ApplicationActions.loadApplicationsSuccess({
+              applications
+            })
+          ),
+          catchError(error =>
+            of(
+              ApplicationActions.loadApplicationsFailure({
+                error: error.message || 'Error loading applications'
+              })
+            )
+          )
+        )
+      )
+    )
+  );
+
+  changeApplicationStatus$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ApplicationActions.changeApplicationStatus),
+      mergeMap(({ id, status }) =>
+        this.applicationService.updateApplicationStatus(id, status).pipe(
+          map((application) =>
+            ApplicationActions.changeApplicationStatusSuccess({
+              application
+            })
+          ),
+          catchError(error =>
+            of(
+              ApplicationActions.changeApplicationStatusFailure({
+                error: error.message || 'Error updating status'
+              })
+            )
+          )
+        )
+      )
+    )
+  );
+
+  deleteApplication$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ApplicationActions.deleteApplication),
+      mergeMap(({ id }) =>
+        this.applicationService.deleteApplication(id).pipe(
+          map(() =>
+            ApplicationActions.deleteApplicationSuccess({
+              id
+            })
+          ),
+          catchError(error =>
+            of(
+              ApplicationActions.deleteApplicationFailure({
+                error: error.message || 'Error deleting application'
+              })
+            )
+          )
+        )
+      )
+    )
+  );
 
 }

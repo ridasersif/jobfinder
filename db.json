@@ -13,6 +13,34 @@
       "lastName": "sersif",
       "email": "sersif@gmail.Com",
       "password": "$2b$10$lyNFSJITrdoa41oR3igeu.xJPukyTBWUJWJWmO3GYrLstgkVOHok6"
+    },
+    {
+      "id": "e5af",
+      "firstName": "Nehru",
+      "lastName": "Poole",
+      "email": "cohene@mailinator.com",
+      "password": "$2b$10$0KRh5P3yUcpyAVSGncXHGeyMaVxNi93Tqvp7KDA0mdLf61J0t49KO"
+    },
+    {
+      "id": "f742",
+      "firstName": "Dakota",
+      "lastName": "Robinson",
+      "email": "xinef@mailinator.com",
+      "password": "$2b$10$uprR57NJxZZbZRhO4QlBOu0tu81rNoaDiHxR0qJIuubiwyKJU8GuK"
+    },
+    {
+      "id": "ab7e",
+      "firstName": "Rae",
+      "lastName": "Goodwin",
+      "email": "doqosytofe@mailinator.com",
+      "password": "$2b$10$eGT5uuDgUy3rIXoSG9LRL.3YLNmgKTHdEMWWtdyoZl8VaOXo6Q73u"
+    },
+    {
+      "id": "df18",
+      "firstName": "Ferris",
+      "lastName": "Jacobs",
+      "email": "xuhosox@mailinator.com",
+      "password": "$2b$10$pbX3SzKULxXAxacGtnXnD.teQcEhO0iy3xoAZn0w2Z27zL.KxXHG2"
     }
   ],
   "favoritesOffers": [
@@ -49,25 +77,33 @@
       "location": "Hamburg"
     },
     {
-      "id": "3197",
+      "id": "2598",
       "userId": "6a05",
-      "slug": "regionalleiter-vertrieb-sicherheitstechnik-berlin-88026",
-      "title": "Regionalleiter Vertrieb (m/w/d) Sicherheitstechnik Berlin",
-      "company": "Stadtritter GmbH",
+      "slug": "sales-manager-in-teilzeit-vormittags-berlin-259598",
+      "title": "Sales Manager (m/w/d) in Teilzeit (Vormittags)",
+      "company": "Juit GmbH",
       "location": "Berlin"
+    },
+    {
+      "id": "8e12",
+      "userId": "6a05",
+      "slug": "solution-architect-automation-ai-n8n-focus-tubingen-487573",
+      "title": "Solution Architect Automation & AI (n8n Focus)",
+      "company": "relyon AG",
+      "location": "Tübingen"
     }
   ],
   "applications": [
     {
-      "id": "2058",
+      "id": "b118",
       "userId": "6a05",
-      "JobSlug": "team-lead-accounting-scaling-phase-berlin-95956",
-      "title": "Team Lead Accounting | Scaling Phase",
-      "company": "Matera GmbH",
+      "JobSlug": "sales-manager-in-teilzeit-vormittags-berlin-259598",
+      "title": "Sales Manager (m/w/d) in Teilzeit (Vormittags)",
+      "company": "Juit GmbH",
       "location": "Berlin",
       "status": "pending",
-      "dateAdded": "2026-02-16T10:38:03.038Z",
-      "statusUpdated": null
+      "dateAdded": "2026-02-19T19:23:37.829Z",
+      "statusUpdated": "2026-02-19T19:24:06.938Z"
     }
   ]
 }

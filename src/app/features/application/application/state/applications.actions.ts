@@ -74,12 +74,12 @@ export const changeApplicationStatusFailure = createAction(
 
 export const deleteApplication = createAction(
   '[Applications] Delete Application',
-  props<{ id: number }>()
+  props<{ id: string }>()
 );
 
 export const deleteApplicationSuccess = createAction(
   '[Applications] Delete Application Success',
-  props<{ id: number }>()
+  props<{ id: string }>()
 );
 
 export const deleteApplicationFailure = createAction(

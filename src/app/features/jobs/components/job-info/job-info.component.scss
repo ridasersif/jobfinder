@@ -70,6 +70,20 @@
   &:hover {
     background: #2563eb;
   }
+
+  &.applied {
+    background: #22c55e;
+    cursor: not-allowed;
+
+    &:hover {
+      background: #22c55e;
+    }
+  }
+
+  &:disabled {
+    opacity: 0.9;
+    cursor: not-allowed;
+  }
 }
 
 .save-btn-slim {

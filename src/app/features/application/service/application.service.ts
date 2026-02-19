@@ -14,6 +14,21 @@ export class ApplicationService {
     return this.http.post<Application>(this.apiUrl, application)
   }
 
+  getApplicationsByUserId(userId: string) {
+    return this.http.get<Application[]>(`${this.apiUrl}?userId=${userId}`);
+  }
+
+  updateApplicationStatus(id: string, status: 'pending' | 'accepted' | 'rejected') {
+    return this.http.patch<Application>(`${this.apiUrl}/${id}`, {
+      status,
+      statusUpdated: new Date().toISOString()
+    });
+  }
+
+  deleteApplication(id: string) {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
+
 
 
 

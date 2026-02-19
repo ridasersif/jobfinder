@@ -36,22 +36,22 @@
         <!-- Action Bar Slim -->
         <div class="d-flex align-items-center justify-content-between">
             <div class="d-flex gap-2">
-                <button class="btn apply-btn-slim" (click)="addToApplication()">
+                <button [class.applied]="hasApplied" [disabled]="hasApplied" class="btn apply-btn-slim"
+                    (click)="addToApplication()">
+                    @if (hasApplied) {
+                    <lucide-icon name="check" [size]="12"></lucide-icon>
+                    Candidature envoyée
+                    } @else {
                     Postuler
                     <lucide-icon name="external-link" [size]="12"></lucide-icon>
+                    }
                 </button>
-                <button
-                  [class.favorited]="isFavorited"
-                  class="btn save-btn-slim"
-                  (click)="handleFavoriteClick()"
-                >
+                <button [class.favorited]="isFavorited" class="btn save-btn-slim" (click)="handleFavoriteClick()">
 
-                  <lucide-icon
-                    [name]="isFavorited ? 'bookmark-check' : 'bookmark'"
-                    [size]="14">
-                  </lucide-icon>
+                    <lucide-icon [name]="isFavorited ? 'bookmark-check' : 'bookmark'" [size]="14">
+                    </lucide-icon>
 
-                  {{ isFavorited ? 'Enregistré' : 'Enregistrer' }}
+                    {{ isFavorited ? 'Enregistré' : 'Enregistrer' }}
 
                 </button>
 
@@ -107,30 +107,26 @@
 <!-- LOGIN REQUIRED MODAL -->
 <div *ngIf="showLoginModal" class="login-modal-backdrop">
 
-  <div class="login-modal-box">
+    <div class="login-modal-box">
 
-    <h5 class="mb-3">Connexion requise</h5>
+        <h5 class="mb-3">Connexion requise</h5>
 
-    <p class="text-muted small mb-4">
-      Vous devez être connecté pour enregistrer ce job.
-    </p>
+        <p class="text-muted small mb-4">
+            Vous devez être connecté pour enregistrer ce job.
+        </p>
 
-    <div class="d-flex gap-2 justify-content-end">
+        <div class="d-flex gap-2 justify-content-end">
 
-      <button class="btn btn-light"
-              (click)="showLoginModal = false">
-        Annuler
-      </button>
+            <button class="btn btn-light" (click)="showLoginModal = false">
+                Annuler
+            </button>
 
-      <button class="btn btn-primary"
-              (click)="goToLogin()">
-        Se connecter
-      </button>
+            <button class="btn btn-primary" (click)="goToLogin()">
+                Se connecter
+            </button>
+
+        </div>
 
     </div>
 
-  </div>
-
 </div>
-
-

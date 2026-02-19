@@ -1,1 +1,168 @@
-<p>application works!</p>
+<div class="kanban-page">
+    <div class="header-section">
+        <div class="title-wrapper">
+            <h1 class="page-title">Mes Candidatures</h1>
+            <p class="page-subtitle">Suivez l'état de vos demandes d'emploi en temps réel.</p>
+        </div>
+    </div>
+
+    @if (loading$ | async) {
+    <div class="loading-state">
+        <div class="spinner"></div>
+        <p>Chargement de vos candidatures...</p>
+    </div>
+    } @else {
+    @if (error$ | async; as error) {
+    <div class="error-state">
+        <lucide-icon name="alert-circle" [size]="48"></lucide-icon>
+        <p>{{ error }}</p>
+    </div>
+    } @else {
+    <div class="kanban-board" cdkDropListGroup>
+        <!-- Pending Column -->
+        <div class="kanban-column pending">
+            <div class="column-header">
+                <div class="status-indicator"></div>
+                <h2>En attente</h2>
+                <span class="count">{{ pending.length }}</span>
+            </div>
+            <div id="cdk-drop-list-pending" cdkDropList [cdkDropListData]="pending" class="kanban-list"
+                (cdkDropListDropped)="drop($event)">
+                @for (app of pending; track app.id) {
+                <div class="kanban-card" cdkDrag>
+                    <div class="card-glow"></div>
+                    <div class="card-content">
+                        <div class="job-header">
+                            <h3>{{ app.title }}</h3>
+                            <div class="header-actions">
+                                <a [routerLink]="['/jobs', app.JobSlug]" class="info-btn" title="Voir détails">
+                                    <lucide-icon name="external-link" [size]="14"></lucide-icon>
+                                </a>
+                                <button class="delete-btn" (click)="removeApplication(app.id)" title="Supprimer">
+                                    <lucide-icon name="trash-2" [size]="14"></lucide-icon>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="company-info">
+                            <span class="company-name">{{ app.company }}</span>
+                        </div>
+                        <div class="card-footer">
+                            <div class="location">
+                                <lucide-icon name="map-pin" [size]="12"></lucide-icon>
+                                <span>{{ app.location }}</span>
+                            </div>
+                            <div class="date">{{ app.dateAdded | date:'dd MMM' }}</div>
+                        </div>
+                    </div>
+                    <div class="drag-placeholder" *cdkDragPlaceholder></div>
+                </div>
+                }
+            </div>
+        </div>
+
+        <!-- Accepted Column -->
+        <div class="kanban-column accepted">
+            <div class="column-header">
+                <div class="status-indicator"></div>
+                <h2>Acceptées</h2>
+                <span class="count">{{ accepted.length }}</span>
+            </div>
+            <div id="cdk-drop-list-accepted" cdkDropList [cdkDropListData]="accepted" class="kanban-list"
+                (cdkDropListDropped)="drop($event)">
+                @for (app of accepted; track app.id) {
+                <div class="kanban-card" cdkDrag>
+                    <div class="card-glow"></div>
+                    <div class="card-content">
+                        <div class="job-header">
+                            <h3>{{ app.title }}</h3>
+                            <div class="header-actions">
+                                <a [routerLink]="['/jobs', app.JobSlug]" class="info-btn" title="Voir détails">
+                                    <lucide-icon name="external-link" [size]="14"></lucide-icon>
+                                </a>
+                                <button class="delete-btn" (click)="removeApplication(app.id)" title="Supprimer">
+                                    <lucide-icon name="trash-2" [size]="14"></lucide-icon>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="company-info">
+                            <span class="company-name">{{ app.company }}</span>
+                        </div>
+                        <div class="card-footer">
+                            <div class="location">
+                                <lucide-icon name="map-pin" [size]="12"></lucide-icon>
+                                <span>{{ app.location }}</span>
+                            </div>
+                            <div class="date">{{ app.dateAdded | date:'dd MMM' }}</div>
+                        </div>
+                    </div>
+                    <div class="drag-placeholder" *cdkDragPlaceholder></div>
+                </div>
+                }
+            </div>
+        </div>
+
+        <!-- Rejected Column -->
+        <div class="kanban-column rejected">
+            <div class="column-header">
+                <div class="status-indicator"></div>
+                <h2>Refusées</h2>
+                <span class="count">{{ rejected.length }}</span>
+            </div>
+            <div id="cdk-drop-list-rejected" cdkDropList [cdkDropListData]="rejected" class="kanban-list"
+                (cdkDropListDropped)="drop($event)">
+                @for (app of rejected; track app.id) {
+                <div class="kanban-card" cdkDrag>
+                    <div class="card-glow"></div>
+                    <div class="card-content">
+                        <div class="job-header">
+                            <h3>{{ app.title }}</h3>
+                            <div class="header-actions">
+                                <a [routerLink]="['/jobs', app.JobSlug]" class="info-btn" title="Voir détails">
+                                    <lucide-icon name="external-link" [size]="14"></lucide-icon>
+                                </a>
+                                <button class="delete-btn" (click)="removeApplication(app.id)" title="Supprimer">
+                                    <lucide-icon name="trash-2" [size]="14"></lucide-icon>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="company-info">
+                            <span class="company-name">{{ app.company }}</span>
+                        </div>
+                        <div class="card-footer">
+                            <div class="location">
+                                <lucide-icon name="map-pin" [size]="12"></lucide-icon>
+                                <span>{{ app.location }}</span>
+                            </div>
+                            <div class="date">{{ app.dateAdded | date:'dd MMM' }}</div>
+                        </div>
+                    </div>
+                    <div class="drag-placeholder" *cdkDragPlaceholder></div>
+                </div>
+                }
+            </div>
+        </div>
+    </div>
+    }
+    }
+
+    <!-- Confirmation Modal -->
+    @if (showDeleteModal) {
+    <div class="modal-backdrop" (click)="cancelDelete()">
+        <div class="confirm-modal" (click)="$event.stopPropagation()">
+            <div class="modal-header">
+                <div class="warning-icon">
+                    <lucide-icon name="alert-triangle" [size]="24"></lucide-icon>
+                </div>
+                <h3>Confirmation</h3>
+            </div>
+            <div class="modal-body">
+                <p>Êtes-vous sûr de vouloir supprimer cette candidature ?</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-cancel" (click)="cancelDelete()">Annuler</button>
+                <button class="btn-confirm" (click)="confirmDelete()">Confirmer</button>
+            </div>
+        </div>
+    </div>
+    }
+</div>
