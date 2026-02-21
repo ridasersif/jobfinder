@@ -1,0 +1,131 @@
+<div class="profile-page-wrapper">
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-10 col-xl-9">
+
+                <div class="d-flex align-items-center mb-4 gap-2">
+                    <button class="btn btn-icon-only" routerLink="/jobs">
+                        <lucide-icon name="arrow-left" [size]="20"></lucide-icon>
+                    </button>
+                    <h4 class="mb-0 fw-bold text-dark">Mon Profil</h4>
+                </div>
+
+                <div class="card profile-card border-0 shadow-sm overflow-hidden">
+                    <div class="row g-0">
+                        <!-- Left Sidebar (Navigation) -->
+                        <div class="col-md-4 col-lg-3 bg-light border-end">
+                            <div class="p-4 text-center border-bottom">
+                                <div class="avatar-box mb-3 mx-auto">
+                                    <img [src]="'https://api.dicebear.com/7.x/initials/svg?seed=' + (currentUser?.firstName + ' ' + currentUser?.lastName)"
+                                        alt="Avatar" class="avatar-img">
+                                </div>
+                                <h6 class="fw-bold mb-1">{{ currentUser?.firstName }} {{ currentUser?.lastName }}</h6>
+                                <p class="text-muted small mb-0 text-truncate">{{ currentUser?.email }}</p>
+                            </div>
+
+                            <div class="list-group list-group-flush py-2">
+                                <button
+                                    class="list-group-item list-group-item-action border-0 py-3 px-4 d-flex align-items-center gap-3"
+                                    [class.active]="activeTab === 'info'" (click)="setActiveTab('info')">
+                                    <lucide-icon name="user" [size]="18"></lucide-icon>
+                                    <span class="fw-medium">Informations</span>
+                                </button>
+                                <button
+                                    class="list-group-item list-group-item-action border-0 py-3 px-4 d-flex align-items-center gap-3"
+                                    [class.active]="activeTab === 'security'" (click)="setActiveTab('security')">
+                                    <lucide-icon name="lock" [size]="18"></lucide-icon>
+                                    <span class="fw-medium">Sécurité</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Right Content -->
+                        <div class="col-md-8 col-lg-9 bg-white">
+                            <div class="p-4 p-lg-5">
+
+                                <!-- Personal Info Tab -->
+                                <div *ngIf="activeTab === 'info'">
+                                    <h5 class="fw-bold mb-4 text-primary">Informations Personnelles</h5>
+                                    <form [formGroup]="profileForm" (ngSubmit)="onUpdateProfile()">
+                                        <div class="row g-3">
+                                            <div class="col-md-6">
+                                                <label class="form-label small fw-bold text-muted">Prénom</label>
+                                                <input type="text" class="form-control premium-input"
+                                                    formControlName="firstName">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="form-label small fw-bold text-muted">Nom</label>
+                                                <input type="text" class="form-control premium-input"
+                                                    formControlName="lastName">
+                                            </div>
+                                            <div class="col-12">
+                                                <label class="form-label small fw-bold text-muted">Email</label>
+                                                <input type="email" class="form-control premium-input"
+                                                    formControlName="email">
+                                            </div>
+                                        </div>
+
+                                        <div class="mt-4 d-flex justify-content-end">
+                                            <button type="submit"
+                                                class="btn btn-primary px-4 py-2 fw-medium btn-premium"
+                                                [disabled]="profileForm.invalid || isLoading || profileForm.pristine">
+                                                <span *ngIf="isLoading"
+                                                    class="spinner-border spinner-border-sm me-2"></span>
+                                                Enregistrer
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <!-- Security Tab -->
+                                <div *ngIf="activeTab === 'security'" class="fade-in">
+                                    <h5 class="fw-bold mb-4 text-primary">Mot de passe & Sécurité</h5>
+                                    <form [formGroup]="passwordForm" (ngSubmit)="onChangePassword()">
+                                        <div class="mb-3">
+                                            <label class="form-label small fw-bold text-muted">Mot de passe
+                                                actuel</label>
+                                            <input type="password" class="form-control premium-input"
+                                                formControlName="currentPassword">
+                                        </div>
+
+                                        <div class="row g-3 mb-3">
+                                            <div class="col-md-6">
+                                                <label class="form-label small fw-bold text-muted">Nouveau mot de
+                                                    passe</label>
+                                                <input type="password" class="form-control premium-input"
+                                                    formControlName="newPassword">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="form-label small fw-bold text-muted">Confirmer le mot de
+                                                    passe</label>
+                                                <input type="password" class="form-control premium-input"
+                                                    formControlName="confirmPassword">
+                                            </div>
+                                        </div>
+
+                                        <div *ngIf="passwordForm.errors?.['mismatch'] && passwordForm.get('confirmPassword')?.touched"
+                                            class="alert alert-danger py-2 small mb-3">
+                                            Les mots de passe ne correspondent pas.
+                                        </div>
+
+                                        <div class="mt-4 d-flex justify-content-end">
+                                            <button type="submit"
+                                                class="btn btn-primary px-4 py-2 fw-medium btn-premium"
+                                                [disabled]="passwordForm.invalid || isLoading">
+                                                <span *ngIf="isLoading"
+                                                    class="spinner-border spinner-border-sm me-2"></span>
+                                                Modifier le mot de passe
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

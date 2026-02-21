@@ -17,7 +17,12 @@ export const routes: Routes = [
           { path: ':slug', loadComponent: () => import('./features/jobs/components/job-info/job-info.component').then(m => m.JobInfoComponent) }
         ]
       },
-      {path: 'applications', loadComponent: () => import('./features/application/application/application.component').then(m => m.ApplicationComponent), canActivate: [authGuard] }
+      { path: 'applications', loadComponent: () => import('./features/application/application/application.component').then(m => m.ApplicationComponent), canActivate: [authGuard] },
+      {
+        path: 'profile',
+        loadComponent: () => import('./features/profile/profile.component').then(m => m.ProfileComponent),
+        canActivate: [authGuard]
+      }
     ]
   },
   {

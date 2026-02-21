@@ -1,7 +1,7 @@
 export interface User {
-  id?: number;       // facultatif, généré par JSON Server
-  firstName: string; // prénom
-  lastName: string;  // nom
+  id?: number;       
+  firstName: string; 
+  lastName: string;  
   email: string;
   password: string;
 }

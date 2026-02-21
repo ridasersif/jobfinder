@@ -2,10 +2,10 @@
   "users": [
     {
       "id": "6a05",
-      "firstName": "rida",
+      "firstName": "sersif",
       "lastName": "sersif",
       "email": "ridasersif1@gmail.com",
-      "password": "$2b$10$oxOD6ACLCaL0vYbKGSBi3OB5Gbq.RnsX5zfXjFfZX5XxzP/2asmbm"
+      "password": "$2b$10$N8D8Ggbt6q1vxDYAW7et3.MOT6Zol5W8PoNt.wWKg7UIx5oIxGjY2"
     },
     {
       "id": "f2fc",
@@ -41,6 +41,13 @@
       "lastName": "Jacobs",
       "email": "xuhosox@mailinator.com",
       "password": "$2b$10$pbX3SzKULxXAxacGtnXnD.teQcEhO0iy3xoAZn0w2Z27zL.KxXHG2"
+    },
+    {
+      "id": "3cfa",
+      "firstName": "sersif",
+      "lastName": "sersifi",
+      "email": "ridasersif12@gmail.com",
+      "password": "$2b$10$egTa910pHXcO.Hpv3UQESOM0RN9wX2sfmQdpmQBI9FBczoLAwhT1i"
     }
   ],
   "favoritesOffers": [
@@ -95,15 +102,26 @@
   ],
   "applications": [
     {
-      "id": "b118",
+      "id": "7722",
+      "userId": "3cfa",
+      "JobSlug": "sales-manager-in-teilzeit-vormittags-berlin-259598",
+      "title": "Sales Manager (m/w/d) in Teilzeit (Vormittags)",
+      "company": "Juit GmbH",
+      "location": "Berlin",
+      "status": "accepted",
+      "dateAdded": "2026-02-19T22:45:30.230Z",
+      "statusUpdated": "2026-02-19T22:45:49.386Z"
+    },
+    {
+      "id": "992a",
       "userId": "6a05",
       "JobSlug": "sales-manager-in-teilzeit-vormittags-berlin-259598",
       "title": "Sales Manager (m/w/d) in Teilzeit (Vormittags)",
       "company": "Juit GmbH",
       "location": "Berlin",
-      "status": "pending",
-      "dateAdded": "2026-02-19T19:23:37.829Z",
-      "statusUpdated": "2026-02-19T19:24:06.938Z"
+      "status": "rejected",
+      "dateAdded": "2026-02-19T23:02:31.414Z",
+      "statusUpdated": "2026-02-19T23:02:47.298Z"
     }
   ]
 }

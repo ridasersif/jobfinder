@@ -24,7 +24,10 @@ import {
   FileText,
   Trash2,
   AlertTriangle,
-  Info
+  Info,
+  User,
+  ArrowLeft,
+  Lock
 
 } from 'lucide-angular';
 
@@ -54,5 +57,8 @@ export const LUCIDE_ICONS = {
   FileText,
   Trash2,
   AlertTriangle,
-  Info
+  Info,
+  User,
+  ArrowLeft,
+  Lock
 };

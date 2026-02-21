@@ -50,7 +50,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link icon-link" routerLink="/applications"routerLinkActive="active" title="Mes Candidatures">
+          <a class="nav-link icon-link" routerLink="/applications" routerLinkActive="active" title="Mes Candidatures">
             <lucide-icon name="file-text" [size]="16"></lucide-icon>
           </a>
         </li>
@@ -58,19 +58,24 @@
         <div class="nav-divider"></div>
 
         @if(isLoggedIn){
-          <li class="nav-item">
-            <button class="btn logout-btn-premium d-flex align-items-center gap-2" (click)="logout()">
-              <lucide-icon name="log-out" [size]="14"></lucide-icon>
-              <span>Quitter</span>
-            </button>
-          </li>
+        <li class="nav-item">
+          <a class="nav-link icon-link" routerLink="/profile" routerLinkActive="active" title="Mon Profil">
+            <lucide-icon name="user" [size]="16"></lucide-icon>
+          </a>
+        </li>
+        <li class="nav-item">
+          <button class="btn logout-btn-premium d-flex align-items-center gap-2" (click)="logout()">
+            <lucide-icon name="log-out" [size]="14"></lucide-icon>
+            <span>Quitter</span>
+          </button>
+        </li>
         }@else{
-          <li class="nav-item">
-            <a class="nav-link auth-link-simple" [routerLink]="['/login']">Connexion</a>
-          </li>
-          <li class="nav-item">
-            <a class="btn register-btn-slim" [routerLink]="['/register']">S’inscrire</a>
-          </li>
+        <li class="nav-item">
+          <a class="nav-link auth-link-simple" [routerLink]="['/login']">Connexion</a>
+        </li>
+        <li class="nav-item">
+          <a class="btn register-btn-slim" [routerLink]="['/register']">S’inscrire</a>
+        </li>
         }
       </ul>
     </div>

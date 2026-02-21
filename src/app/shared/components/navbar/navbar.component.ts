@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { LucideAngularModule } from 'lucide-angular';
 import { filter } from 'rxjs';
+import { UserSession } from '../../../shared/models/user.model';
 
 @Component({
   selector: 'app-navbar',
@@ -18,6 +19,7 @@ import { filter } from 'rxjs';
 export class NavbarComponent implements OnInit {
 
   isLoggedIn = false;
+  currentUser: UserSession | null = null;
   isScrolled = false;
   isJobsPage = false;
   searchQuery = '';
@@ -38,6 +40,11 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
     this.authService.isLoggedIn$.subscribe(status => {
       this.isLoggedIn = status;
+      if (status) {
+        this.currentUser = this.authService.getCurrentUser();
+      } else {
+        this.currentUser = null;
+      }
     });
 
     // Track route to show/hide search

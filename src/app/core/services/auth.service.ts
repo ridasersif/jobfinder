@@ -11,12 +11,12 @@ import { isPlatformBrowser } from '@angular/common';
 export class AuthService {
   private apiUrl = 'http://localhost:3000/users';
 
-   private loggedInSubject = new BehaviorSubject<boolean>(false);
-   public isLoggedIn$ = this.loggedInSubject.asObservable();
+  private loggedInSubject = new BehaviorSubject<boolean>(false);
+  public isLoggedIn$ = this.loggedInSubject.asObservable();
 
   constructor(
-  private http: HttpClient,
-  @Inject(PLATFORM_ID) private platformId: Object
+    private http: HttpClient,
+    @Inject(PLATFORM_ID) private platformId: Object
   ) {
     if (isPlatformBrowser(this.platformId)) {
       const user = localStorage.getItem('user');
@@ -34,22 +34,27 @@ export class AuthService {
     }
   }
 
+  public updateUserSession(user: UserSession): void {
+    this.setStorage('user', user);
+    this.loggedInSubject.next(true);
+  }
+
 
 
   register(user: User): Observable<User> {
-  const salt = bcrypt.genSaltSync(10);
-  const hashedPassword = bcrypt.hashSync(user.password, salt);
-  const userToSave = { ...user, password: hashedPassword };
+    const salt = bcrypt.genSaltSync(10);
+    const hashedPassword = bcrypt.hashSync(user.password, salt);
+    const userToSave = { ...user, password: hashedPassword };
 
-  return this.http.post<User>(this.apiUrl, userToSave).pipe(
-    map(savedUser => {
-      const { password, ...userSansPassword } = savedUser;
-      this.setStorage('user', userSansPassword);
-      this.loggedInSubject.next(true);
-      return savedUser;
-    })
-  );
-}
+    return this.http.post<User>(this.apiUrl, userToSave).pipe(
+      map(savedUser => {
+        const { password, ...userSansPassword } = savedUser;
+        this.setStorage('user', userSansPassword);
+        this.loggedInSubject.next(true);
+        return savedUser;
+      })
+    );
+  }
 
 
 
